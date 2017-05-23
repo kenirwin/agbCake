@@ -3,7 +3,7 @@
   * @var \App\View\AppView $this
   */
 ?>
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
+<nav class="large-2 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Html->link(__('Edit Convent'), ['action' => 'edit', $convent->id]) ?> </li>
@@ -13,7 +13,7 @@
 	<?= $this->element('menu'); ?>
     </ul>
 </nav>
-<div class="convents view large-9 medium-8 columns content">
+<div class="convents view large-10 medium-8 columns content">
     <h3><?= h($convent->name) ?></h3>
     <table class="vertical-table">
         <tr>

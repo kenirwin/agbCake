@@ -3,7 +3,7 @@
   * @var \App\View\AppView $this
   */
 ?>
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
+<nav class="large-2 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Form->postLink(
@@ -15,7 +15,7 @@
 	<?= $this->element('menu'); ?>
     </ul>
 </nav>
-<div class="portraits form large-9 medium-8 columns content">
+<div class="portraits form large-10 medium-8 columns content">
     <?= $this->Form->create($portrait) ?>
     <fieldset>
         <legend><?= __('Edit Portrait') ?></legend>

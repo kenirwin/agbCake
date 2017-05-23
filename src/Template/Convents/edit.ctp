@@ -12,6 +12,7 @@
                 ['confirm' => __('Are you sure you want to delete # {0}?', $convent->id)]
             )
         ?></li>
+        <li><?= $this->Html->link(__('New Convent'), ['action' => 'add']) ?> </li>
 	<?= $this->element('menu'); ?>
     </ul>
 </nav>

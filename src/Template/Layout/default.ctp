@@ -42,6 +42,10 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
             </li>
         </ul>
         <div class="top-bar-section">
+	    <ul class="left">
+	    <li><?= $this->Html->link('Women of Las Descalzas Reales', array('controller'=>'women','action'=>'index')); ?></li>
+	    </ul>
+
             <ul class="right">
                 <li><a target="_blank" href="http://book.cakephp.org/3.0/">Documentation</a></li>
                 <li><a target="_blank" href="http://api.cakephp.org/3.0/">API</a></li>

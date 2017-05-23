@@ -34,7 +34,7 @@
                 <td><?= h($portrait->title) ?></td>
                 <td><?= $portrait->has('woman') ? $this->Html->link($portrait->woman->name, ['controller' => 'Women', 'action' => 'view', $portrait->woman->id]) : '' ?></td>
                 <td><?= h($portrait->painter) ?></td>
-                <td><?= h($portrait->painter_viaf) ?></td>
+                <td><? if($portrait->painter_viaf) { print '<a target="viaf" href="'. h($portrait->painter_viaf) .'">VIAF</a>'; } ?></td>
                 <td><?= h($portrait->date_painted) ?></td>
                 <td><?= h($portrait->date_painted_approx) ?></td>
                 <td><?= h($portrait->image_path_lo) ?></td>

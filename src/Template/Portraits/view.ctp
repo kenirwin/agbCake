@@ -30,7 +30,7 @@
         </tr>
         <tr>
             <th scope="row"><?= __('Painter Viaf') ?></th>
-            <td><?= h($portrait->painter_viaf) ?></td>
+            <td><? if ($portrait->painter_viaf) { print '<a target="viaf" href="'.h($portrait->painter_viaf).'">'.h($portrait->painter_viaf).'</a>'; } ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Date Painted Approx') ?></th>

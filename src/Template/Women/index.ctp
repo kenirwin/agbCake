@@ -27,8 +27,6 @@
                 <th scope="col"><?= $this->Paginator->sort('death_approx') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('death_year') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('religious_order') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('created') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('modified') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
         </thead>
@@ -47,8 +45,6 @@
                 <td><? if ($woman->death_approx == 1) { print 'ca.'; } ?></td>
                 <td><?= h($woman->death_year) ?></td>
                 <td><?= h($woman->religious_order) ?></td>
-                <td><?= h($woman->created) ?></td>
-                <td><?= h($woman->modified) ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $woman->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $woman->id]) ?>

@@ -24,8 +24,6 @@
                 <th scope="col"><?= $this->Paginator->sort('date_painted_approx') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('image_path_lo') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('image_path_hi') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('created') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('modified') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
         </thead>
@@ -37,12 +35,10 @@
                 <td><?= $portrait->has('woman') ? $this->Html->link($portrait->woman->name, ['controller' => 'Women', 'action' => 'view', $portrait->woman->id]) : '' ?></td>
                 <td><?= h($portrait->painter) ?></td>
                 <td><?= h($portrait->painter_viaf) ?></td>
-                <td><?= $this->Number->format($portrait->date_painted) ?></td>
+                <td><?= h($portrait->date_painted) ?></td>
                 <td><?= h($portrait->date_painted_approx) ?></td>
                 <td><?= h($portrait->image_path_lo) ?></td>
                 <td><?= h($portrait->image_path_hi) ?></td>
-                <td><?= h($portrait->created) ?></td>
-                <td><?= h($portrait->modified) ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $portrait->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $portrait->id]) ?>

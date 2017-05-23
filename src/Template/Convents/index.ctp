@@ -27,8 +27,6 @@
                 <th scope="col"><?= $this->Paginator->sort('date_closing') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('latitude') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('longitude') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('created') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('modified') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
         </thead>
@@ -43,12 +41,10 @@
                 <td><?= h($convent->name_other) ?></td>
                 <td><?= h($convent->city) ?></td>
                 <td><?= h($convent->country) ?></td>
-                <td><?= $this->Number->format($convent->date_founding) ?></td>
-                <td><?= $this->Number->format($convent->date_closing) ?></td>
+                <td><?= h($convent->date_founding); ?></td>
+                <td><?= h($convent->date_closing); ?></td>
                 <td><?= h($convent->latitude) ?></td>
                 <td><?= h($convent->longitude) ?></td>
-                <td><?= h($convent->created) ?></td>
-                <td><?= h($convent->modified) ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $convent->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $convent->id]) ?>

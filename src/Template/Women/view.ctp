@@ -53,19 +53,19 @@
         </tr>
         <tr>
             <th scope="row"><?= __('Birth Approx') ?></th>
-            <td><?= $this->Number->format($woman->birth_approx) ?></td>
+            <td><? if ($woman->birth_approx == 1) { print 'circa'; } ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Birth Year') ?></th>
-            <td><?= $this->Number->format($woman->birth_year) ?></td>
+            <td><?= h($woman->birth_year) ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Death Approx') ?></th>
-            <td><?= $this->Number->format($woman->death_approx) ?></td>
+            <td><? if ($woman->death_approx == 1) { print 'circa'; } ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Death Year') ?></th>
-            <td><?= $this->Number->format($woman->death_year) ?></td>
+            <td><?= h($woman->death_year) ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Created') ?></th>

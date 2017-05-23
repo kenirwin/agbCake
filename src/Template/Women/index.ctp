@@ -45,10 +45,10 @@
                 <td><?= h($woman->name_spanish) ?></td>
                 <td><?= h($woman->name_portuguese) ?></td>
                 <td><?= h($woman->name_other) ?></td>
-                <td><?= $this->Number->format($woman->birth_approx) ?></td>
-                <td><?= $this->Number->format($woman->birth_year) ?></td>
-                <td><?= $this->Number->format($woman->death_approx) ?></td>
-                <td><?= $this->Number->format($woman->death_year) ?></td>
+                <td><? if ($woman->birth_approx == 1) { print 'ca.'; } ?></td>
+                <td><?= h($woman->birth_year) ?></td>
+                <td><? if ($woman->death_approx == 1) { print 'ca.'; } ?></td>
+                <td><?= h($woman->death_year) ?></td>
                 <td><?= h($woman->religious_order) ?></td>
                 <td><?= h($woman->created) ?></td>
                 <td><?= h($woman->modified) ?></td>

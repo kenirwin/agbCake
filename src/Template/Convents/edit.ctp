@@ -28,8 +28,8 @@
             echo $this->Form->control('name_other');
             echo $this->Form->control('city');
             echo $this->Form->control('country');
-            echo $this->Form->control('date_founding');
-            echo $this->Form->control('date_closing');
+            echo $this->Form->control('date_founding', ['type'=>'text']);
+            echo $this->Form->control('date_closing', ['type'=>'text']);
             echo $this->Form->control('latitude');
             echo $this->Form->control('longitude');
             echo $this->Form->control('women._ids', ['options' => $women]);

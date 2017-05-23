@@ -40,7 +40,7 @@
             <tr>
                 <td><?= $this->Number->format($woman->id) ?></td>
                 <td><?= h($woman->name) ?></td>
-                <td><?= h($woman->viaf_url) ?></td>
+                <td><? if ($woman->viaf_url) { print '<a target="viaf" href="'.h($woman->viaf_url).'">VIAF</a>'; } ?></td>
                 <td><?= h($woman->name_english) ?></td>
                 <td><?= h($woman->name_spanish) ?></td>
                 <td><?= h($woman->name_portuguese) ?></td>

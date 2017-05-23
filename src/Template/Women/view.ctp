@@ -20,12 +20,16 @@
     <h3><?= h($woman->name) ?></h3>
     <table class="vertical-table">
         <tr>
+            <th scope="row"><?= __('Id') ?></th>
+            <td><?= $this->Number->format($woman->id) ?></td>
+        </tr>
+        <tr>
             <th scope="row"><?= __('Name') ?></th>
             <td><?= h($woman->name) ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Viaf Url') ?></th>
-            <td><?= h($woman->viaf_url) ?></td>
+            <td><? if ($woman->viaf_url) { print '<a target="viaf" href="'.h($woman->viaf_url).'">'.h($woman->viaf_url).'</a>'; } ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Name English') ?></th>
@@ -46,10 +50,6 @@
         <tr>
             <th scope="row"><?= __('Religious Order') ?></th>
             <td><?= h($woman->religious_order) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Id') ?></th>
-            <td><?= $this->Number->format($woman->id) ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Birth Approx') ?></th>

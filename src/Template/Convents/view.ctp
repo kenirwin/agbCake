@@ -8,10 +8,7 @@
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Html->link(__('Edit Convent'), ['action' => 'edit', $convent->id]) ?> </li>
         <li><?= $this->Form->postLink(__('Delete Convent'), ['action' => 'delete', $convent->id], ['confirm' => __('Are you sure you want to delete # {0}?', $convent->id)]) ?> </li>
-        <li><?= $this->Html->link(__('List Convents'), ['action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Convent'), ['action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Women'), ['controller' => 'Women', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Woman'), ['controller' => 'Women', 'action' => 'add']) ?> </li>
+	<?= $this->element('menu'); ?>
     </ul>
 </nav>
 <div class="convents view large-9 medium-8 columns content">

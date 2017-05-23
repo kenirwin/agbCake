@@ -1,7 +1,7 @@
 	<hr>
         <li class="heading"><?= __('Women') ?></li>		
-	<li><?= $this->Html->link(__('List Women'), ['action' => 'index']) ?> </li>
-	<li><?= $this->Html->link(__('New Woman'), ['action' => 'add']) ?> </li>
+	<li><?= $this->Html->link(__('List Women'), ['controller' => 'Women', 'action' => 'index']) ?> </li>
+	<li><?= $this->Html->link(__('New Woman'), ['controller' => 'Women', 'action' => 'add']) ?> </li>
 	<hr>
         <li class="heading"><?= __('Convents') ?></li>
         <li><?= $this->Html->link(__('List Convents'), ['controller' => 'Convents', 'action' => 'index']) ?></li>

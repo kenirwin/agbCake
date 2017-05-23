@@ -8,12 +8,7 @@
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Html->link(__('Edit Woman'), ['action' => 'edit', $woman->id]) ?> </li>
         <li><?= $this->Form->postLink(__('Delete Woman'), ['action' => 'delete', $woman->id], ['confirm' => __('Are you sure you want to delete # {0}?', $woman->id)]) ?> </li>
-        <li><?= $this->Html->link(__('List Women'), ['action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Woman'), ['action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Portraits'), ['controller' => 'Portraits', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Portrait'), ['controller' => 'Portraits', 'action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Convents'), ['controller' => 'Convents', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Convent'), ['controller' => 'Convents', 'action' => 'add']) ?> </li>
+	<?= $this->element('menu'); ?>
     </ul>
 </nav>
 <div class="women view large-9 medium-8 columns content">

@@ -17,6 +17,10 @@
     <h3><?= h($portrait->title) ?></h3>
     <table class="vertical-table">
         <tr>
+            <th scope="row"><?= __('Id') ?></th>
+            <td><?= $this->Number->format($portrait->id) ?></td>
+        </tr>
+        <tr>
             <th scope="row"><?= __('Title') ?></th>
             <td><?= h($portrait->title) ?></td>
         </tr>
@@ -34,7 +38,11 @@
         </tr>
         <tr>
             <th scope="row"><?= __('Date Painted Approx') ?></th>
-            <td><?= h($portrait->date_painted_approx) ?></td>
+            <td><? if($portrait->date_painted_approx == 1) {print 'circa';} ?></td>
+        </tr>
+        <tr>
+            <th scope="row"><?= __('Date Painted') ?></th>
+            <td><?= h($portrait->date_painted) ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Image Path Lo') ?></th>
@@ -43,14 +51,6 @@
         <tr>
             <th scope="row"><?= __('Image Path Hi') ?></th>
             <td><?= h($portrait->image_path_hi) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Id') ?></th>
-            <td><?= $this->Number->format($portrait->id) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Date Painted') ?></th>
-            <td><?= $this->Number->format($portrait->date_painted) ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Created') ?></th>

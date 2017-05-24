@@ -13,7 +13,7 @@
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
 
-$cakeDescription = 'CakePHP: the rapid development php framework';
+$cakeDescription = 'Women of Las Descalzas Reales';
 ?>
 <!DOCTYPE html>
 <html>
@@ -29,7 +29,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     <?= $this->Html->css('base.css') ?>
     <?= $this->Html->css('cake.css') ?>
     <?= $this->Html->css('agb.css')  ?>
-    <?= $this->Html->css('local.css') ?>
+    <?= $this->Html->css('local.css?12344') ?>
 
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>

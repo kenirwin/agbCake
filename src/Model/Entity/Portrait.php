@@ -14,9 +14,8 @@ use Cake\ORM\Entity;
  * @property int $date_painted
  * @property string $date_painted_approx
  * @property string $notes
- * @property string|resource $image_file
- * @property string $image_path_lo
- * @property string $image_path_hi
+ * @property string $image_path
+ * @property string $image_filename
  * @property \Cake\I18n\FrozenTime $created
  * @property \Cake\I18n\FrozenTime $modified
  *

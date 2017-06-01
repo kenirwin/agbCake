@@ -6,21 +6,6 @@ use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
 
-/**
- * Portraits Model
- *
- * @property \Cake\ORM\Association\BelongsTo $Women
- *
- * @method \App\Model\Entity\Portrait get($primaryKey, $options = [])
- * @method \App\Model\Entity\Portrait newEntity($data = null, array $options = [])
- * @method \App\Model\Entity\Portrait[] newEntities(array $data, array $options = [])
- * @method \App\Model\Entity\Portrait|bool save(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method \App\Model\Entity\Portrait patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
- * @method \App\Model\Entity\Portrait[] patchEntities($entities, array $data, array $options = [])
- * @method \App\Model\Entity\Portrait findOrCreate($search, callable $callback = null, $options = [])
- *
- * @mixin \Cake\ORM\Behavior\TimestampBehavior
- */
 class PortraitsTable extends Table
 {
 
@@ -79,13 +64,10 @@ class PortraitsTable extends Table
             ->allowEmpty('notes');
 
         $validator
-            ->allowEmpty('image_file');
+            ->allowEmpty('image_path');
 
         $validator
-            ->allowEmpty('image_path_lo');
-
-        $validator
-            ->allowEmpty('image_path_hi');
+            ->allowEmpty('image_filename');
 
         return $validator;
     }

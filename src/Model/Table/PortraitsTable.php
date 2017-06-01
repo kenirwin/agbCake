@@ -25,6 +25,18 @@ class PortraitsTable extends Table
 
         $this->addBehavior('Timestamp');
 
+	$this->addBehavior('Josegonzalez/Upload.Upload', [
+            'photo' => [
+                'fields' => [
+                    // if these fields or their defaults exist
+                    // the values will be set.
+                    'dir' => 'image_path', // defaults to `dir`
+                    'size' => 'image_size', // defaults to `size`
+                    'type' => 'image_type', // defaults to `type`
+                ],
+            ],
+        ]);
+
         $this->belongsTo('Women', [
             'foreignKey' => 'woman_id',
             'joinType' => 'INNER'

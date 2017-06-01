@@ -21,8 +21,8 @@
             echo $this->Form->control('date_painted_approx', ['type'=>'checkbox']);
             echo $this->Form->control('date_painted', ['type' => 'text']);
             echo $this->Form->control('notes');
-            echo $this->Form->control('image_path_lo');
-            echo $this->Form->control('image_path_hi');
+            echo $this->Form->control('image_filename', ['type'=>'file']);
+            echo $this->Form->control('image_path', ['type'=>'hidden']);
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>

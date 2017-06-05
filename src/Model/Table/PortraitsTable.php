@@ -23,19 +23,19 @@ class PortraitsTable extends Table
         $this->setDisplayField('title');
         $this->setPrimaryKey('id');
 
-        $this->addBehavior('Timestamp');
-
 	$this->addBehavior('Josegonzalez/Upload.Upload', [
             'photo' => [
                 'fields' => [
                     // if these fields or their defaults exist
                     // the values will be set.
-                    'dir' => 'image_path', // defaults to `dir`
+                    'dir' => 'image_dir', // defaults to `dir`
                     'size' => 'image_size', // defaults to `size`
                     'type' => 'image_type', // defaults to `type`
                 ],
             ],
         ]);
+
+        $this->addBehavior('Timestamp');
 
         $this->belongsTo('Women', [
             'foreignKey' => 'woman_id',
@@ -76,10 +76,10 @@ class PortraitsTable extends Table
             ->allowEmpty('notes');
 
         $validator
-            ->allowEmpty('image_path');
+            ->allowEmpty('image_dir');
 
         $validator
-            ->allowEmpty('image_filename');
+            ->allowEmpty('image');
 
         return $validator;
     }

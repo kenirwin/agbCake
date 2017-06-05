@@ -16,7 +16,7 @@
     </ul>
 </nav>
 <div class="portraits form large-10 medium-8 columns content">
-    <?= $this->Form->create($portrait) ?>
+    <?= $this->Form->create($portrait, ['type'=>'file']) ?>
     <fieldset>
         <legend><?= __('Edit Portrait') ?></legend>
         <?php
@@ -27,8 +27,8 @@
             echo $this->Form->control('date_painted_approx', ['type'=>'checkbox']);
             echo $this->Form->control('date_painted', ['type' => 'text']);
             echo $this->Form->control('notes');
-            echo $this->Form->control('image_filename', ['type'=>'file']);
-            echo $this->Form->control('image_path', ['type'=>'hidden']);
+            echo $this->Form->control('image', ['type'=>'file']);
+            echo $this->Form->control('image_dir', ['type'=>'hidden']);
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>

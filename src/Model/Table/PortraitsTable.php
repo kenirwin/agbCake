@@ -80,19 +80,6 @@ class PortraitsTable extends Table
         $validator
             ->allowEmpty('image_dir');
 	
-	$validator
-	  ->add('image', 'fileCompletedUpload', [
-						   'rule' => 'isCompletedUpload',
-						   'message'=>'this file could not upload completely',
-						   'provider'=>'upload'
-						   ]);
-
-	$validator->add('image', 'fileFileUpload', [
-						   'rule' => 'isFileUpload',
-						   'message' => 'There was no file found to upload',
-        'provider' => 'upload'
-						   ]);
-
         $validator
             ->allowEmpty('image');
 

@@ -1,3 +1,6 @@
 table td {
     word-break: normal !important;
 }
+img.index-thumb {
+    height: 50px;
+}

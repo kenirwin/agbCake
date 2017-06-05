@@ -22,8 +22,7 @@
                 <th scope="col"><?= $this->Paginator->sort('painter_viaf') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('date_painted_approx') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('date_painted') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('image') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('image_dir') ?></th>
+                <th scope="col">Image</th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
         </thead>
@@ -37,8 +36,9 @@
                 <td><? if($portrait->painter_viaf) { print '<a target="viaf" href="'. h($portrait->painter_viaf) .'">VIAF</a>'; } ?></td>
                 <td><? if($portrait->date_painted_approx == 1) { print 'ca.';} ?></td>
                 <td><?= h($portrait->date_painted) ?></td>
-                <td><?= h($portrait->image) ?></td>
-                <td><?= h($portrait->image_dir) ?></td>
+    	 	<? $img_url = preg_replace("/webroot/","",$portrait->image_dir) .'/'. $portrait->image; ?> 
+                <td><?= $this->Html->image($img_url, ['alt' => 'Photo of ' . $portrait->title, 'class' => 'index-thumb']); ?>
+</td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $portrait->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $portrait->id]) ?>

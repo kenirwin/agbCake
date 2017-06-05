@@ -92,9 +92,8 @@
                 <th scope="col"><?= __('Date Painted') ?></th>
                 <th scope="col"><?= __('Date Painted Approx') ?></th>
                 <th scope="col"><?= __('Notes') ?></th>
-                <th scope="col"><?= __('Image File') ?></th>
-                <th scope="col"><?= __('Image Path Lo') ?></th>
-                <th scope="col"><?= __('Image Path Hi') ?></th>
+                <th scope="col"><?= __('Image') ?></th>
+                <th scope="col"><?= __('Image Dir') ?></th>
                 <th scope="col"><?= __('Created') ?></th>
                 <th scope="col"><?= __('Modified') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
@@ -109,9 +108,8 @@
                 <td><?= h($portraits->date_painted) ?></td>
                 <td><?= h($portraits->date_painted_approx) ?></td>
                 <td><?= h($portraits->notes) ?></td>
-                <td><?= h($portraits->image_file) ?></td>
-                <td><?= h($portraits->image_path_lo) ?></td>
-                <td><?= h($portraits->image_path_hi) ?></td>
+                <td><?= h($portraits->image) ?></td>
+                <td><?= h($portraits->image_dir) ?></td>
                 <td><?= h($portraits->created) ?></td>
                 <td><?= h($portraits->modified) ?></td>
                 <td class="actions">

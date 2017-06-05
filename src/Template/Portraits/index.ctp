@@ -35,9 +35,13 @@
                 <td><?= h($portrait->painter) ?></td>
                 <td><? if($portrait->painter_viaf) { print '<a target="viaf" href="'. h($portrait->painter_viaf) .'">VIAF</a>'; } ?></td>
                 <td><? if($portrait->date_painted_approx == 1) { print 'ca.';} ?></td>
-                <td><?= h($portrait->date_painted) ?></td>
+                <td><?= h($portrait->date_painted) ?></td>  
     	 	<? $img_url = preg_replace("/webroot/","",$portrait->image_dir) .'/'. $portrait->image; ?> 
-                <td><?= $this->Html->image($img_url, ['alt' => 'Photo of ' . $portrait->title, 'class' => 'index-thumb']); ?>
+	 	
+                <td>
+		<? if (preg_match('/files/',$img_url)) { ?>	
+		<?= $this->Html->image($img_url, ['alt' => 'Photo of ' . $portrait->title, 'class' => 'index-thumb']); ?>
+		<? } ?>
 </td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $portrait->id]) ?>

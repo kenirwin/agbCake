@@ -63,7 +63,9 @@
     </table>
     <div id="image">
     	 <? $img_url = preg_replace("/webroot/","",$portrait->image_dir) .'/'. $portrait->image; ?> 
-    	 <?= $this->Html->image($img_url, ['alt' => 'Photo of ' . $portrait->title]); ?>
+	 <? if (preg_match('/files/',$img_url)) { ?>
+    	 <?= $this->Html->image($img_url, ['alt' => 'Photo of ' . $portrait->title]); ?>	
+	 <? } ?>
     </div>
     <div class="row">
         <h4><?= __('Notes') ?></h4>

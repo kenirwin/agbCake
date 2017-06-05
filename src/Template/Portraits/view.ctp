@@ -45,12 +45,12 @@
             <td><?= h($portrait->date_painted) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Image Path Lo') ?></th>
-            <td><?= h($portrait->image_path_lo) ?></td>
+            <th scope="row"><?= __('Image Dir') ?></th>
+            <td><?= h($portrait->image_dir) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Image Path Hi') ?></th>
-            <td><?= h($portrait->image_path_hi) ?></td>
+            <th scope="row"><?= __('Image Filename') ?></th>
+            <td><?= h($portrait->image) ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Created') ?></th>
@@ -61,6 +61,10 @@
             <td><?= h($portrait->modified) ?></td>
         </tr>
     </table>
+    <div id="image">
+    	 <? $img_url = preg_replace("/webroot/","",$portrait->image_dir) .'/'. $portrait->image; ?> 
+    	 <?= $this->Html->image($img_url, ['alt' => 'Photo of ' . $portrait->title]); ?>
+    </div>
     <div class="row">
         <h4><?= __('Notes') ?></h4>
         <?= $this->Text->autoParagraph(h($portrait->notes)); ?>

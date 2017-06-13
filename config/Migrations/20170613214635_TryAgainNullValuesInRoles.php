@@ -1,7 +1,7 @@
 <?php
 use Migrations\AbstractMigration;
 
-class AllowNullsInRoles extends AbstractMigration
+class TryAgainNullValuesInRoles extends AbstractMigration
 {
     /**
      * Change Method.

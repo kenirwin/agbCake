@@ -6,11 +6,8 @@
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('New Role'), ['action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Women'), ['controller' => 'Women', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Woman'), ['controller' => 'Women', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Convents'), ['controller' => 'Convents', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Convent'), ['controller' => 'Convents', 'action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('New Role'), ['action' => 'add']) ?> </li>
+	<?= $this->element('menu'); ?>
     </ul>
 </nav>
 <div class="roles index large-9 medium-8 columns content">

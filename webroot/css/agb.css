@@ -4,3 +4,12 @@ table td {
 img.index-thumb {
     height: 50px;
 }
+.side-nav {
+    line-height: 0.9;
+}
+.side-nav li {
+ margin-top: 0;
+ margin-bottom: 0;
+ padding-top: 0;
+ padding-bottom: 0;
+}

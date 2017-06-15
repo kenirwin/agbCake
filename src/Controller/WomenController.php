@@ -36,7 +36,7 @@ class WomenController extends AppController
     public function view($id = null)
     {
         $woman = $this->Women->get($id, [
-            'contain' => ['Convents', 'Portraits']
+            'contain' => ['Roles', 'Portraits']
         ]);
 
         $this->set('woman', $woman);
@@ -75,7 +75,7 @@ class WomenController extends AppController
     public function edit($id = null)
     {
         $woman = $this->Women->get($id, [
-            'contain' => ['Convents']
+            'contain' => []
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $woman = $this->Women->patchEntity($woman, $this->request->getData());
@@ -86,7 +86,6 @@ class WomenController extends AppController
             }
             $this->Flash->error(__('The woman could not be saved. Please, try again.'));
         }
-        $convents = $this->Women->Convents->find('list', ['limit' => 200]);
         $this->set(compact('woman', 'convents'));
         $this->set('_serialize', ['woman']);
     }

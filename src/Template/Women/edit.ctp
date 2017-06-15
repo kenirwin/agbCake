@@ -33,7 +33,6 @@
             echo $this->Form->control('related_to');
             echo $this->Form->control('religious_order');
             echo $this->Form->control('notes');
-            echo $this->Form->control('convents._ids', ['options' => $convents]);
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>

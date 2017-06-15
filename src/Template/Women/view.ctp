@@ -79,6 +79,41 @@
         <h4><?= __('Notes') ?></h4>
         <?= $this->Text->autoParagraph(h($woman->notes)); ?>
     </div>
+
+
+    <div class="related">
+        <h4><?= __('Related Roles') ?></h4>
+        <?php if (!empty($woman->roles)): ?>
+        <table cellpadding="0" cellspacing="0">
+            <tr>
+                <th scope="col"><?= __('Id') ?></th>
+                <th scope="col"><?= __('Woman Id') ?></th>
+                <th scope="col"><?= __('Convent Id') ?></th>
+                <th scope="col"><?= __('Role') ?></th>
+                <th scope="col"><?= __('Start Date') ?></th>
+                <th scope="col"><?= __('End Date') ?></th>
+                <th scope="col" class="actions"><?= __('Actions') ?></th>
+            </tr>
+            <?php foreach ($woman->roles as $roles): ?>
+            <tr>
+                <td><?= h($roles->id) ?></td>
+                <td><?= h($roles->woman_id) ?></td>
+                <td><?= h($roles->convent_id) ?></td>
+                <td><?= h($roles->role) ?></td>
+                <td><?= h($roles->start_date) ?></td>
+                <td><?= h($roles->end_date) ?></td>
+                <td class="actions">
+                    <?= $this->Html->link(__('View'), ['controller' => 'Roles', 'action' => 'view', $roles->id]) ?>
+                    <?= $this->Html->link(__('Edit'), ['controller' => 'Roles', 'action' => 'edit', $roles->id]) ?>
+                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'Roles', 'action' => 'delete', $roles->id], ['confirm' => __('Are you sure you want to delete # {0}?', $roles->id)]) ?>
+                </td>
+            </tr>
+            <?php endforeach; ?>
+        </table>
+        <?php endif; ?>
+    </div>
+
+
     <div class="related">
         <h4><?= __('Related Portraits') ?></h4>
         <?php if (!empty($woman->portraits)): ?>
@@ -122,51 +157,5 @@
         </table>
         <?php endif; ?>
     </div>
-    <div class="related">
-        <h4><?= __('Related Convents') ?></h4>
-        <?php if (!empty($woman->convents)): ?>
-        <table cellpadding="0" cellspacing="0">
-            <tr>
-                <th scope="col"><?= __('Id') ?></th>
-                <th scope="col"><?= __('Name') ?></th>
-                <th scope="col"><?= __('Name English') ?></th>
-                <th scope="col"><?= __('Name Spanish') ?></th>
-                <th scope="col"><?= __('Name Portuguese') ?></th>
-                <th scope="col"><?= __('Name Other') ?></th>
-                <th scope="col"><?= __('City') ?></th>
-                <th scope="col"><?= __('Country') ?></th>
-                <th scope="col"><?= __('Date Founding') ?></th>
-                <th scope="col"><?= __('Date Closing') ?></th>
-                <th scope="col"><?= __('Latitude') ?></th>
-                <th scope="col"><?= __('Longitude') ?></th>
-                <th scope="col"><?= __('Created') ?></th>
-                <th scope="col"><?= __('Modified') ?></th>
-                <th scope="col" class="actions"><?= __('Actions') ?></th>
-            </tr>
-            <?php foreach ($woman->convents as $convents): ?>
-            <tr>
-                <td><?= h($convents->id) ?></td>
-                <td><?= h($convents->name) ?></td>
-                <td><?= h($convents->name_english) ?></td>
-                <td><?= h($convents->name_spanish) ?></td>
-                <td><?= h($convents->name_portuguese) ?></td>
-                <td><?= h($convents->name_other) ?></td>
-                <td><?= h($convents->city) ?></td>
-                <td><?= h($convents->country) ?></td>
-                <td><?= h($convents->date_founding) ?></td>
-                <td><?= h($convents->date_closing) ?></td>
-                <td><?= h($convents->latitude) ?></td>
-                <td><?= h($convents->longitude) ?></td>
-                <td><?= h($convents->created) ?></td>
-                <td><?= h($convents->modified) ?></td>
-                <td class="actions">
-                    <?= $this->Html->link(__('View'), ['controller' => 'Convents', 'action' => 'view', $convents->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['controller' => 'Convents', 'action' => 'edit', $convents->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'Convents', 'action' => 'delete', $convents->id], ['confirm' => __('Are you sure you want to delete # {0}?', $convents->id)]) ?>
-                </td>
-            </tr>
-            <?php endforeach; ?>
-        </table>
-        <?php endif; ?>
-    </div>
+
 </div>

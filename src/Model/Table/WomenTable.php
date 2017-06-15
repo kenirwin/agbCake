@@ -6,22 +6,6 @@ use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
 
-/**
- * Women Model
- *
- * @property \Cake\ORM\Association\HasMany $Portraits
- * @property \Cake\ORM\Association\BelongsToMany $Convents
- *
- * @method \App\Model\Entity\Woman get($primaryKey, $options = [])
- * @method \App\Model\Entity\Woman newEntity($data = null, array $options = [])
- * @method \App\Model\Entity\Woman[] newEntities(array $data, array $options = [])
- * @method \App\Model\Entity\Woman|bool save(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method \App\Model\Entity\Woman patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
- * @method \App\Model\Entity\Woman[] patchEntities($entities, array $data, array $options = [])
- * @method \App\Model\Entity\Woman findOrCreate($search, callable $callback = null, $options = [])
- *
- * @mixin \Cake\ORM\Behavior\TimestampBehavior
- */
 class WomenTable extends Table
 {
 
@@ -44,11 +28,16 @@ class WomenTable extends Table
         $this->hasMany('Portraits', [
             'foreignKey' => 'woman_id'
         ]);
+        $this->hasMany('Roles', [
+            'foreignKey' => 'woman_id'
+				 ]);
+	/*
         $this->belongsToMany('Convents', [
             'foreignKey' => 'woman_id',
             'targetForeignKey' => 'convent_id',
             'joinTable' => 'women_convents'
         ]);
+	*/
     }
 
     /**

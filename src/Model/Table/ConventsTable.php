@@ -24,12 +24,12 @@ class ConventsTable extends Table
         $this->setPrimaryKey('id');
 
         $this->addBehavior('Timestamp');
-
-
+	
+	
         $this->hasMany('Roles', [
 				 'foreignKey' => 'convent_id'
 				 ]);
-
+	$this->belongsToMany('ReligiousOrders');
         $this->belongsToMany('Women', [
 				       'through' => 'Roles'
         ]);

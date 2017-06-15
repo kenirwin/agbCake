@@ -32,6 +32,10 @@
             echo $this->Form->control('date_closing', ['type'=>'text']);
             echo $this->Form->control('latitude');
             echo $this->Form->control('longitude');
+echo $this->Form->control('ReligiousOrder', array(
+						  'multiple'=>'multiple',
+						  'type'=> 'select'
+						  ));
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>

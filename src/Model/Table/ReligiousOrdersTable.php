@@ -23,8 +23,7 @@ class ReligiousOrdersTable extends Table
         $this->setDisplayField('name');
         $this->setPrimaryKey('id');
 
-	$this->hasMany('Convents');
-
+	$this->belongsToMany('Convents', ['through' => 'Affiliations']);
         $this->addBehavior('Timestamp');
     }
 

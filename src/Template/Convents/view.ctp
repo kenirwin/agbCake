@@ -149,5 +149,42 @@
     </div>
 
 
+<div class="related">
+        <h4><?= __('Related Religious Orders') ?></h4>
+        <?php if (!empty($convent->religiousOrders)): ?>
+	<? print_r($convent->religiousOrders); ?>
+        <table cellpadding="0" cellspacing="0">
+            <tr>
+                <th scope="col"><?= __('Id') ?></th>
+                <th scope="col"><?= __('Name') ?></th>
+                <th scope="col"><?= __('VIAF') ?></th>
+                <th scope="col" class="actions"><?= __('Actions') ?></th>
+            </tr>
+            <?php foreach ($convent->religiousOrders as $order): ?>
+	    <?
+	   /*
+	    $women = $convent->women;
+	    foreach ($women as $woman) {
+	    if ($woman->id == $role->woman_id) { $curr_woman = $woman->name; }
+	    }
+	   */
+	    ?>
+            <tr>
+                <td><?= h($order->id) ?></td>
+<!--                <td><?= $this->Html->link(h($curr_woman), ['controller' => 'Women', 'action' => 'view', $role->woman_id]) ?></td>-->
+                <td><?= h($order->name) ?></td>
+                <td><?= h($order->viaf_url) ?></td>
+                <td class="actions">
+                    <?= $this->Html->link(__('View'), ['controller' => 'ReligiousOrders', 'action' => 'view', $order->id]) ?>
+                    <?= $this->Html->link(__('Edit'), ['controller' => 'ReligiousOrders', 'action' => 'edit', $order->id]) ?>
+                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'ReligiousOrders', 'action' => 'delete', $order->id], ['confirm' => __('Are you sure you want to delete # {0}?', $order->id)]) ?>
+                </td>
+            </tr>
+            <?php endforeach; ?>
+        </table>
+        <?php endif; ?>
+    </div>
+
+
 
 </div>

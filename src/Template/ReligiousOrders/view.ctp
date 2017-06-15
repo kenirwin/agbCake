@@ -38,4 +38,32 @@
             <td><?= h($religiousOrder->modified) ?></td>
         </tr>
     </table>
+
+
+    <div class="related">
+        <h4><?= __('Related Convents') ?></h4>
+
+    <?php if (!empty($religiousOrder->convents)): ?>
+        <table cellpadding="0" cellspacing="0">
+            <tr>
+                <th scope="col"><?= __('Convent') ?></th>
+                <th scope="col" class="actions"><?= __('Actions') ?></th>
+            </tr>
+            <?php foreach ($religiousOrder->convents as $convent): ?>
+	   
+            <tr>
+                <td><?= h($convent->name) ?></td>
+                <td class="actions">
+                    <?= $this->Html->link(__('View'), ['controller' => 'Roles', 'action' => 'view', $convent->id]) ?>
+                    <?= $this->Html->link(__('Edit'), ['controller' => 'Roles', 'action' => 'edit', $convent->id]) ?>
+                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'Roles', 'action' => 'delete', $convent->id], ['confirm' => __('Are you sure you want to delete # {0}?', $convent->id)]) ?>
+                </td>
+            </tr>
+            <?php endforeach; ?>
+        </table>
+        <?php endif; ?>
+    </div>
+
+
 </div>
+

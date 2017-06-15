@@ -29,7 +29,7 @@ class ReligiousOrdersController extends AppController
     public function view($id = null)
     {
         $religiousOrder = $this->ReligiousOrders->get($id, [
-            'contain' => []
+							    'contain' => ['Convents']
         ]);
 
         $this->set('religiousOrder', $religiousOrder);

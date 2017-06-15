@@ -32,7 +32,7 @@
             echo $this->Form->control('date_closing', ['type'=>'text']);
             echo $this->Form->control('latitude');
             echo $this->Form->control('longitude');
-echo $this->Form->control('ReligiousOrder', array(
+echo $this->Form->control('ReligiousOrders', array(
 						  'multiple'=>'multiple',
 						  'type'=> 'select'
 						  ));

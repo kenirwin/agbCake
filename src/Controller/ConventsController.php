@@ -82,7 +82,8 @@ class ConventsController extends AppController
         }
 	//        $women = $this->Convents->Women->find('list', ['limit' => 200]);
         $religiousOrders = $this->Convents->ReligiousOrders->find('list', ['limit' => 200]);
-        $this->set(compact('convent', 'women', 'religiousOrders'));
+	$affiliations = $this->Convents->Affiliations->find('list', ['limit' => 200]);
+        $this->set(compact('convent', 'women', 'religiousOrders', 'affiliations'));
         $this->set('_serialize', ['convent']);
     }
 

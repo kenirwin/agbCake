@@ -6,22 +6,6 @@ use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
 
-/**
- * Roles Model
- *
- * @property \Cake\ORM\Association\BelongsTo $Women
- * @property \Cake\ORM\Association\BelongsTo $Convents
- *
- * @method \App\Model\Entity\Role get($primaryKey, $options = [])
- * @method \App\Model\Entity\Role newEntity($data = null, array $options = [])
- * @method \App\Model\Entity\Role[] newEntities(array $data, array $options = [])
- * @method \App\Model\Entity\Role|bool save(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method \App\Model\Entity\Role patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
- * @method \App\Model\Entity\Role[] patchEntities($entities, array $data, array $options = [])
- * @method \App\Model\Entity\Role findOrCreate($search, callable $callback = null, $options = [])
- *
- * @mixin \Cake\ORM\Behavior\TimestampBehavior
- */
 class RolesTable extends Table
 {
 

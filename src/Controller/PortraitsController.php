@@ -3,13 +3,6 @@ namespace App\Controller;
 
 use App\Controller\AppController;
 
-/**
- * Portraits Controller
- *
- * @property \App\Model\Table\PortraitsTable $Portraits
- *
- * @method \App\Model\Entity\Portrait[] paginate($object = null, array $settings = [])
- */
 class PortraitsController extends AppController
 {
 

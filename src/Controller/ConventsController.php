@@ -3,13 +3,6 @@ namespace App\Controller;
 
 use App\Controller\AppController;
 
-/**
- * Convents Controller
- *
- * @property \App\Model\Table\ConventsTable $Convents
- *
- * @method \App\Model\Entity\Convent[] paginate($object = null, array $settings = [])
- */
 class ConventsController extends AppController
 {
 

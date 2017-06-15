@@ -3,13 +3,6 @@ namespace App\Controller;
 
 use App\Controller\AppController;
 
-/**
- * Women Controller
- *
- * @property \App\Model\Table\WomenTable $Women
- *
- * @method \App\Model\Entity\Woman[] paginate($object = null, array $settings = [])
- */
 class WomenController extends AppController
 {
 

@@ -31,13 +31,9 @@ class WomenTable extends Table
         $this->hasMany('Roles', [
             'foreignKey' => 'woman_id'
 				 ]);
-	/*
         $this->belongsToMany('Convents', [
-            'foreignKey' => 'woman_id',
-            'targetForeignKey' => 'convent_id',
-            'joinTable' => 'women_convents'
+				       'through' => 'Roles'
         ]);
-	*/
     }
 
     /**

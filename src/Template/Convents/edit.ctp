@@ -32,7 +32,6 @@
             echo $this->Form->control('date_closing', ['type'=>'text']);
             echo $this->Form->control('latitude');
             echo $this->Form->control('longitude');
-            echo $this->Form->control('women._ids', ['options' => $women]);
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>

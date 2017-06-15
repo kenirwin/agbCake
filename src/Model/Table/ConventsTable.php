@@ -6,21 +6,6 @@ use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
 
-/**
- * Convents Model
- *
- * @property \Cake\ORM\Association\BelongsToMany $Women
- *
- * @method \App\Model\Entity\Convent get($primaryKey, $options = [])
- * @method \App\Model\Entity\Convent newEntity($data = null, array $options = [])
- * @method \App\Model\Entity\Convent[] newEntities(array $data, array $options = [])
- * @method \App\Model\Entity\Convent|bool save(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method \App\Model\Entity\Convent patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
- * @method \App\Model\Entity\Convent[] patchEntities($entities, array $data, array $options = [])
- * @method \App\Model\Entity\Convent findOrCreate($search, callable $callback = null, $options = [])
- *
- * @mixin \Cake\ORM\Behavior\TimestampBehavior
- */
 class ConventsTable extends Table
 {
 
@@ -40,11 +25,15 @@ class ConventsTable extends Table
 
         $this->addBehavior('Timestamp');
 
+
+        $this->hasMany('Roles', [
+				 'foreignKey' => 'convent_id'
+				 ]);
+
         $this->belongsToMany('Women', [
-            'foreignKey' => 'convent_id',
-            'targetForeignKey' => 'woman_id',
-            'joinTable' => 'women_convents'
+				       'through' => 'Roles'
         ]);
+
     }
 
     /**

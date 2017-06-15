@@ -18,7 +18,7 @@ class CreateConventsReligiousOrders extends AbstractMigration
             'limit' => 11,
             'null' => false,
         ]);
-        $table->addColumn('relgious_order_id', 'integer', [
+        $table->addColumn('religious_order_id', 'integer', [
             'default' => null,
             'limit' => 11,
             'null' => false,

@@ -13,6 +13,8 @@
             )
         ?></li>
         <li><?= $this->Html->link(__('List Religious Orders'), ['action' => 'index']) ?></li>
+
+	<?= $this->element('menu'); ?>
     </ul>
 </nav>
 <div class="religiousOrders form large-10 medium-8 columns content">

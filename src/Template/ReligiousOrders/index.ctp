@@ -7,6 +7,7 @@
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Html->link(__('New Religious Order'), ['action' => 'add']) ?></li>
+	<?= $this->element('menu'); ?>
     </ul>
 </nav>
 <div class="religiousOrders index large-10 medium-8 columns content">

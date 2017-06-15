@@ -25,7 +25,7 @@ class CreateConventsReligiousOrders extends AbstractMigration
         ]);
         $table->create();
 	
-	$table->addForeignKey('convent_id','convent' array('id'),array('constraint'=>'convent_order_fk'));
+	$table->addForeignKey('convent_id','convents', array('id'),array('constraint'=>'convent_order_fk'));
 	$table->addForeignKey('religious_order_id','religious_orders', array('id'),array('constraint'=>'religious_order_convent_fk'));
 	$table->save();
     }

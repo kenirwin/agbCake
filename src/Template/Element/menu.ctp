@@ -16,5 +16,5 @@
         <li><?= $this->Html->link(__('New Portrait'), ['controller' => 'Portraits', 'action' => 'add']) ?></li>
 	<hr>
         <li class="heading"><?= __('Religious Orders') ?></li>
-        <li><?= $this->Html->link(__('List Orders'), ['controller' => 'Orders', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Order'), ['controller' => 'Orders', 'action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('List Orders'), ['controller' => 'ReligiousOrders', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Order'), ['controller' => 'ReligiousOrders', 'action' => 'add']) ?></li>

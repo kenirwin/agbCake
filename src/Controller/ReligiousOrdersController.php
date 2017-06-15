@@ -3,13 +3,6 @@ namespace App\Controller;
 
 use App\Controller\AppController;
 
-/**
- * ReligiousOrders Controller
- *
- * @property \App\Model\Table\ReligiousOrdersTable $ReligiousOrders
- *
- * @method \App\Model\Entity\ReligiousOrder[] paginate($object = null, array $settings = [])
- */
 class ReligiousOrdersController extends AppController
 {
 

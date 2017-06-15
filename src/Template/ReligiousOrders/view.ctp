@@ -52,11 +52,11 @@
             <?php foreach ($religiousOrder->convents as $convent): ?>
 	   
             <tr>
-                <td><?= h($convent->name) ?></td>
+	   <td><?= $this->Html->Link( h($convent->name), ['controller' => 'Convents', 'action' => 'view', $convent->id]);  ?></td>
                 <td class="actions">
-                    <?= $this->Html->link(__('View'), ['controller' => 'Roles', 'action' => 'view', $convent->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['controller' => 'Roles', 'action' => 'edit', $convent->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'Roles', 'action' => 'delete', $convent->id], ['confirm' => __('Are you sure you want to delete # {0}?', $convent->id)]) ?>
+                    <?= $this->Html->link(__('View'), ['controller' => 'Convents', 'action' => 'view', $convent->id]) ?>
+                    <?= $this->Html->link(__('Edit'), ['controller' => 'Convents', 'action' => 'edit', $convent->id]) ?>
+                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'Convents', 'action' => 'delete', $convent->id], ['confirm' => __('Are you sure you want to delete # {0}?', $convent->id)]) ?>
                 </td>
             </tr>
             <?php endforeach; ?>

@@ -10,9 +10,11 @@
         <li><?= $this->Form->postLink(__('Delete Religious Order'), ['action' => 'delete', $religiousOrder->id], ['confirm' => __('Are you sure you want to delete # {0}?', $religiousOrder->id)]) ?> </li>
         <li><?= $this->Html->link(__('List Religious Orders'), ['action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New Religious Order'), ['action' => 'add']) ?> </li>
+
+	<?= $this->element('menu'); ?>
     </ul>
 </nav>
-<div class="religiousOrders view large-9 medium-8 columns content">
+<div class="religiousOrders view large-10 medium-8 columns content">
     <h3><?= h($religiousOrder->name) ?></h3>
     <table class="vertical-table">
         <tr>

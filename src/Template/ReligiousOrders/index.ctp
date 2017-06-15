@@ -9,7 +9,7 @@
         <li><?= $this->Html->link(__('New Religious Order'), ['action' => 'add']) ?></li>
     </ul>
 </nav>
-<div class="religiousOrders index large-9 medium-8 columns content">
+<div class="religiousOrders index large-10 medium-8 columns content">
     <h3><?= __('Religious Orders') ?></h3>
     <table cellpadding="0" cellspacing="0">
         <thead>

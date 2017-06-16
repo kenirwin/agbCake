@@ -54,8 +54,8 @@ class ConventsController extends AppController
             $this->Flash->error(__('The convent could not be saved. Please, try again.'));
         }
         $women = $this->Convents->Women->find('list', ['limit' => 200]);
-	$religiousOrders = $this->Convents->ReligiousOrders->find('list', ['limit' => 200]);
-        $this->set(compact('convent','women','religiousOrders'));
+	$religious_orders = $this->Convents->ReligiousOrders->find('list', ['limit' => 200]);
+        $this->set(compact('convent','women','religious_orders'));
         $this->set('_serialize', ['convent']);
     }
 
@@ -69,12 +69,12 @@ class ConventsController extends AppController
     public function edit($id = null)
     {
         $convent = $this->Convents->get($id, [
-					      'contain' => ['Roles','Affiliations']
+					      'contain' => ['Roles','Affiliations','ReligiousOrders']
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $convent = $this->Convents->patchEntity($convent, $this->request->getData());
             if ($this->Convents->save($convent)) {
-                $this->Flash->success(__('The convent has been saved.'));
+	      $this->Flash->success(__('The convent has been saved.'. print_r($convent, true)));
 
                 return $this->redirect(['action' => 'index']);
             }
@@ -82,7 +82,7 @@ class ConventsController extends AppController
         }
 	//        $women = $this->Convents->Women->find('list', ['limit' => 200]);
         $religiousOrders = $this->Convents->ReligiousOrders->find('list', ['limit' => 200]);
-	$affiliations = $this->Convents->Affiliations->find('list', ['limit' => 200]);
+	//	$affiliations = $this->Convents->Affiliations->find('list', ['limit' => 200]);
         $this->set(compact('convent', 'women', 'religiousOrders', 'affiliations'));
         $this->set('_serialize', ['convent']);
     }

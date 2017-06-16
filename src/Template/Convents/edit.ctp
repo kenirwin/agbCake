@@ -38,7 +38,8 @@ $curr_orders = array();
 foreach($convent->affiliations as $affil) {
   array_push($curr_orders, $affil->religious_order_id);
 }
-echo $this->Form->control('ReligiousOrders', array(
+
+echo $this->Form->control('religious_orders._ids', array(
 						  'multiple'=>'multiple',
 						  'type'=> 'select',
 						  'value'=> $curr_orders

@@ -18,6 +18,7 @@
 </nav>
 <div class="convents form large-10 medium-8 columns content">
     <?= $this->Form->create($convent) ?>
+    <pre><? var_dump($convent); ?></pre>
     <fieldset>
         <legend><?= __('Edit Convent') ?></legend>
         <?php
@@ -32,9 +33,15 @@
             echo $this->Form->control('date_closing', ['type'=>'text']);
             echo $this->Form->control('latitude');
             echo $this->Form->control('longitude');
+
+$curr_orders = array();
+foreach($convent->affiliations as $affil) {
+  array_push($curr_orders, $affil->religious_order_id);
+}
 echo $this->Form->control('ReligiousOrders', array(
 						  'multiple'=>'multiple',
-						  'type'=> 'select'
+						  'type'=> 'select',
+						  'value'=> $curr_orders
 						  ));
         ?>
     </fieldset>

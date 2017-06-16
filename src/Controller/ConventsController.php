@@ -69,7 +69,7 @@ class ConventsController extends AppController
     public function edit($id = null)
     {
         $convent = $this->Convents->get($id, [
-					      'contain' => ['Roles']
+					      'contain' => ['Roles','Affiliations']
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $convent = $this->Convents->patchEntity($convent, $this->request->getData());

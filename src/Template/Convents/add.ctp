@@ -26,7 +26,7 @@
             echo $this->Form->control('latitude');
             echo $this->Form->control('longitude');
             echo $this->Form->control('women._ids', ['options' => $women]);
-echo $this->Form->control('religious_orders._ids', ['options' => $religiousOrders]);
+echo $this->Form->control('religious_orders._ids', ['options' => $religious_orders]);
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>

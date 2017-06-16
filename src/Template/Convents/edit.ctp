@@ -18,7 +18,6 @@
 </nav>
 <div class="convents form large-10 medium-8 columns content">
     <?= $this->Form->create($convent) ?>
-    <pre><? var_dump($convent); ?></pre>
     <fieldset>
         <legend><?= __('Edit Convent') ?></legend>
         <?php

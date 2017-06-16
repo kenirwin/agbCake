@@ -74,7 +74,7 @@ class ConventsController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $convent = $this->Convents->patchEntity($convent, $this->request->getData());
             if ($this->Convents->save($convent)) {
-	      $this->Flash->success(__('The convent has been saved.'. print_r($convent, true)));
+	      $this->Flash->success(__('The convent has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
             }

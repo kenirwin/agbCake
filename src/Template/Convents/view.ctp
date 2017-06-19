@@ -179,4 +179,51 @@
 
 
 
+
+<div class="related">
+        <h4><?= __('Related Architectural Images') ?></h4>
+	      <?php if (!empty($convent->architectural_images)): ?>
+        <table cellpadding="0" cellspacing="0">
+            <tr>
+                <th scope="col"><?= __('Id') ?></th>
+                <th scope="col"><?= __('Title') ?></th>
+                <th scope="col"><?= __('Image Type') ?></th>
+                <th scope="col"><?= __('Image URL') ?></th>
+                <th scope="col"><?= __('Image') ?></th>
+                <th scope="col" class="actions"><?= __('Actions') ?></th>
+            </tr>
+	   <?php foreach ($convent->architectural_images as $image): ?>
+            <tr>
+                <td><?= h($image->id) ?></td>
+	   <td><?= $this->Html->link( h($image->title), ['controller' => 'ArchitecturalImages', 'action' => 'view', $image->id]);?></td>
+                <td><?= h($image->image_type) ?></td>
+                <td>
+	   <? 
+	   if ($image->image_url) {
+	     print '<a href="'.h($image->image_url).'">Link</a>';
+	   }
+
+	   ?></td>
+	   <td><? // Image
+	   if ($image->image_dir && $image->image) { 
+	     $img_url = preg_replace("/webroot/","",$image->image_dir) . $image->image;
+	     print $this->Html->link( $this->Html->image($img_url), ['controller' => 'ArchitecturalImages', 'action' => 'view', $image->id], ['escape' => false]);
+	   }
+	   ?></td>
+	   
+                <td class="actions">
+                    <?= $this->Html->link(__('View'), ['controller' => 'ArchitecturalImages', 'action' => 'view', $image->id]) ?>
+                    <?= $this->Html->link(__('Edit'), ['controller' => 'ArchitecturalImages', 'action' => 'edit', $image->id]) ?>
+                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'ArchitecturalImages', 'action' => 'delete', $image->id], ['confirm' => __('Are you sure you want to delete # {0}?', $image->id)]) ?>
+                </td>
+            </tr>
+            <?php endforeach; ?>
+        </table>
+        <?php endif; ?>
+    </div>
+
+
+
+
+
 </div>

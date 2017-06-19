@@ -37,7 +37,7 @@ class ConventsTable extends Table
 	$this->hasMany('Affiliations');
 	$this->belongsToMany('ReligiousOrders', ['through' => 'Affiliations']);
 
-
+	$this->hasMany('ArchitecturalImages');
     }
 
     /**

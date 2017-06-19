@@ -20,7 +20,6 @@
                 <th scope="col"><?= $this->Paginator->sort('convent_id') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('image_type') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('image_url') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('image_dir') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('image') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('image_source') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('created') ?></th>
@@ -30,14 +29,22 @@
         </thead>
         <tbody>
             <?php foreach ($architecturalImages as $architecturalImage): ?>
+    	 <? $img_url = preg_replace("/webroot/","",$architecturalImage->image_dir) .'/'. $architecturalImage->image; ?> 
             <tr>
                 <td><?= $this->Number->format($architecturalImage->id) ?></td>
                 <td><?= h($architecturalImage->title) ?></td>
                 <td><?= $architecturalImage->has('convent') ? $this->Html->link($architecturalImage->convent->name, ['controller' => 'Convents', 'action' => 'view', $architecturalImage->convent->id]) : '' ?></td>
                 <td><?= h($architecturalImage->image_type) ?></td>
-                <td><?= h($architecturalImage->image_url) ?></td>
-                <td><?= h($architecturalImage->image_dir) ?></td>
-                <td><?= h($architecturalImage->image) ?></td>
+    <td><? if (strlen($architecturalImage->image_url)>0) { print '<a href="'.h($architecturalImage->image_url).'">Link</a>'; } ?></td>
+                <td>
+    <? 
+    if (preg_match('/files/',$img_url)) { 	
+      $image_link = $this->Html->image($img_url, ['alt' => $architecturalImage->title, 'class' => 'index-thumb']); 
+      print $this->Html->link($image_link, ['action'=>'view', $architecturalImage->id], ['escape'=>false]);
+    }
+?>
+
+		</td>
                 <td><?= h($architecturalImage->image_source) ?></td>
                 <td><?= h($architecturalImage->created) ?></td>
                 <td><?= h($architecturalImage->modified) ?></td>

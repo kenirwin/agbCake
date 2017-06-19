@@ -17,7 +17,7 @@
     </ul>
 </nav>
 <div class="architecturalImages form large-9 medium-8 columns content">
-    <?= $this->Form->create($architecturalImage) ?>
+    <?= $this->Form->create($architecturalImage, ['type'=>'file']) ?>
     <fieldset>
         <legend><?= __('Edit Architectural Image') ?></legend>
         <?php
@@ -25,8 +25,8 @@
             echo $this->Form->control('convent_id', ['options' => $convents]);
             echo $this->Form->control('image_type');
             echo $this->Form->control('image_url');
-            echo $this->Form->control('image_dir');
-            echo $this->Form->control('image');
+echo $this->Form->control('image_dir', ['type'=>'hidden']);
+echo $this->Form->control('image', ['type'=>'file']);
             echo $this->Form->control('image_source');
         ?>
     </fieldset>

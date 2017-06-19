@@ -57,4 +57,11 @@
             <td><?= h($architecturalImage->modified) ?></td>
         </tr>
     </table>
+    <div id="image">
+    	 <? $img_url = preg_replace("/webroot/","",$architecturalImage->image_dir) .'/'. $architecturalImage->image; ?> 
+	 <? if (preg_match('/files/',$img_url)) { ?>
+    	 <?= $this->Html->image($img_url, ['alt' => $architecturalImage->title]); ?>	
+	 <? } ?>
+    </div>
+
 </div>

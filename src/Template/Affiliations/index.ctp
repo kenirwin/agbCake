@@ -3,7 +3,7 @@
   * @var \App\View\AppView $this
   */
 ?>
-<nav class="large-2 medium-4 columns" id="actions-sidebar">
+<nav class="large-2 medium-3 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Html->link(__('New Affiliation'), ['action' => 'add']) ?></li>
@@ -13,7 +13,7 @@
         <li><?= $this->Html->link(__('New Religious Order'), ['controller' => 'ReligiousOrders', 'action' => 'add']) ?></li>
     </ul>
 </nav>
-<div class="affiliations index large-10 medium-8 columns content">
+<div class="affiliations index large-10 medium-9 columns content">
     <h3><?= __('Affiliations') ?></h3>
     <table cellpadding="0" cellspacing="0">
         <thead>

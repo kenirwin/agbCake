@@ -3,7 +3,7 @@
   * @var \App\View\AppView $this
   */
 ?>
-<nav class="large-2 medium-4 columns" id="actions-sidebar">
+<nav class="large-2 medium-3 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Html->link(__('Edit Architectural Image'), ['action' => 'edit', $architecturalImage->id]) ?> </li>
@@ -13,7 +13,7 @@
 	<?= $this->element('menu'); ?>
     </ul>
 </nav>
-<div class="architecturalImages view large-10 medium-8 columns content">
+<div class="architecturalImages view large-10 medium-9 columns content">
     <h3><?= h($architecturalImage->title) ?></h3>
     <table class="vertical-table">
         <tr>

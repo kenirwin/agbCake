@@ -3,13 +3,13 @@
   * @var \App\View\AppView $this
   */
 ?>
-<nav class="large-2 medium-4 columns" id="actions-sidebar">
+<nav class="large-2 medium-3 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
 	<?= $this->element('menu'); ?>
     </ul>
 </nav>
-<div class="convents form large-10 medium-8 columns content">
+<div class="convents form large-10 medium-9 columns content">
     <?= $this->Form->create($convent) ?>
     <fieldset>
         <legend><?= __('Add Convent') ?></legend>

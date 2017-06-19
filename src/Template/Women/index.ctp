@@ -3,14 +3,14 @@
   * @var \App\View\AppView $this
   */
 ?>
-<nav class="large-2 medium-4 columns" id="actions-sidebar">
+<nav class="large-2 medium-3 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Html->link(__('New Woman'), ['action' => 'add']) ?></li>
 	<?= $this->element('menu'); ?>
     </ul>
 </nav>
-<div class="women index large-10 medium-8 columns content">
+<div class="women index large-10 medium-9 columns content">
     <h3><?= __('Women') ?></h3>
     <table cellpadding="0" cellspacing="0">
         <thead>

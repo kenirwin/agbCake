@@ -82,7 +82,7 @@
 
 
     <div class="related">
-        <h4><?= __('Related Roles') ?></h4>
+        <h4><?= __('Roles for '. $woman->name) ?></h4>
         <?php if (!empty($woman->roles)): ?>
         <table cellpadding="0" cellspacing="0">
             <tr>
@@ -118,20 +118,16 @@
 
 
     <div class="related">
-        <h4><?= __('Related Portraits') ?></h4>
+        <h4><?= __('Portraits of '.$woman->name) ?></h4>
         <?php if (!empty($woman->portraits)): ?>
         <table cellpadding="0" cellspacing="0">
             <tr>
                 <th scope="col"><?= __('Id') ?></th>
                 <th scope="col"><?= __('Title') ?></th>
-                <th scope="col"><?= __('Woman Id') ?></th>
                 <th scope="col"><?= __('Painter') ?></th>
                 <th scope="col"><?= __('Painter Viaf') ?></th>
                 <th scope="col"><?= __('Date Painted') ?></th>
-                <th scope="col"><?= __('Date Painted Approx') ?></th>
-                <th scope="col"><?= __('Notes') ?></th>
                 <th scope="col"><?= __('Image') ?></th>
-                <th scope="col"><?= __('Image Dir') ?></th>
                 <th scope="col"><?= __('Created') ?></th>
                 <th scope="col"><?= __('Modified') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
@@ -140,14 +136,17 @@
             <tr>
                 <td><?= h($portraits->id) ?></td>
                 <td><?= h($portraits->title) ?></td>
-                <td><?= h($portraits->woman_id) ?></td>
                 <td><?= h($portraits->painter) ?></td>
-                <td><?= h($portraits->painter_viaf) ?></td>
-                <td><?= h($portraits->date_painted) ?></td>
-                <td><?= h($portraits->date_painted_approx) ?></td>
-                <td><?= h($portraits->notes) ?></td>
+                <td><? if($portraits->painter_viaf) { print '<a target="viaf" href="'. h($portraits->painter_viaf) .'">VIAF</a>'; } ?></td>
+
+	   <? 
+	   if ($portraits->date_painted_approx == 1) { $circa = 'ca. '; }
+	   else { $circa = ''; }
+?>
+
+
+                <td><?= $circa.h($portraits->date_painted) ?></td>
                 <td><?= h($portraits->image) ?></td>
-                <td><?= h($portraits->image_dir) ?></td>
                 <td><?= h($portraits->created) ?></td>
                 <td><?= h($portraits->modified) ?></td>
                 <td class="actions">

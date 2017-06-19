@@ -11,7 +11,7 @@
     </ul>
 </nav>
 <div class="architecturalImages form large-9 medium-8 columns content">
-    <?= $this->Form->create($architecturalImage) ?>
+    <?= $this->Form->create($architecturalImage, ['type'=>'file']) ?>
     <fieldset>
         <legend><?= __('Add Architectural Image') ?></legend>
         <?php

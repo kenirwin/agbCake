@@ -3,24 +3,6 @@ namespace App\Model\Entity;
 
 use Cake\ORM\Entity;
 
-/**
- * Portrait Entity
- *
- * @property int $id
- * @property string $title
- * @property int $woman_id
- * @property string $painter
- * @property string $painter_viaf
- * @property int $date_painted
- * @property string $date_painted_approx
- * @property string $notes
- * @property string $image_dir
- * @property string $image
- * @property \Cake\I18n\FrozenTime $created
- * @property \Cake\I18n\FrozenTime $modified
- *
- * @property \App\Model\Entity\Woman $woman
- */
 class Portrait extends Entity
 {
 

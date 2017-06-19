@@ -15,7 +15,7 @@
 	<?= $this->element('menu'); ?>
     </ul>
 </nav>
-<div class="roles form large-9 medium-8 columns content">
+<div class="roles form large-10 medium-9 columns content">
     <?= $this->Form->create($role) ?>
     <fieldset>
         <legend><?= __('Edit Role') ?></legend>

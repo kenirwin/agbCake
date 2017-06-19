@@ -10,7 +10,7 @@
 	<?= $this->element('menu'); ?>
     </ul>
 </nav>
-<div class="roles index large-9 medium-8 columns content">
+<div class="roles index large-10 medium-9 columns content">
     <h3><?= __('Roles') ?></h3>
     <table cellpadding="0" cellspacing="0">
         <thead>

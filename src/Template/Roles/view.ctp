@@ -12,7 +12,7 @@
 	<?= $this->element('menu'); ?>
     </ul>
 </nav>
-<div class="roles view large-9 medium-8 columns content">
+<div class="roles view large-10 medium-9 columns content">
     <h3><?= h($role->id) ?></h3>
     <table class="vertical-table">
         <tr>

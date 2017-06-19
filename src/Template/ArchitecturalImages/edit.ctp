@@ -13,8 +13,7 @@
             )
         ?></li>
         <li><?= $this->Html->link(__('List Architectural Images'), ['action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('List Convents'), ['controller' => 'Convents', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Convent'), ['controller' => 'Convents', 'action' => 'add']) ?></li>
+	<?= $this->element('menu'); ?>
     </ul>
 </nav>
 <div class="architecturalImages form large-9 medium-8 columns content">

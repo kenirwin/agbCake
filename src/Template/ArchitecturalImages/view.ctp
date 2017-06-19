@@ -10,8 +10,7 @@
         <li><?= $this->Form->postLink(__('Delete Architectural Image'), ['action' => 'delete', $architecturalImage->id], ['confirm' => __('Are you sure you want to delete # {0}?', $architecturalImage->id)]) ?> </li>
         <li><?= $this->Html->link(__('List Architectural Images'), ['action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New Architectural Image'), ['action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Convents'), ['controller' => 'Convents', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Convent'), ['controller' => 'Convents', 'action' => 'add']) ?> </li>
+	<?= $this->element('menu'); ?>
     </ul>
 </nav>
 <div class="architecturalImages view large-10 medium-8 columns content">

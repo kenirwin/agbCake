@@ -7,8 +7,7 @@
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Html->link(__('New Architectural Image'), ['action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Convents'), ['controller' => 'Convents', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Convent'), ['controller' => 'Convents', 'action' => 'add']) ?></li>
+	<?= $this->element('menu'); ?>
     </ul>
 </nav>
 <div class="architecturalImages index large-10 medium-8 columns content">

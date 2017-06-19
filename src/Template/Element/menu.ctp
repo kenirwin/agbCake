@@ -11,6 +11,10 @@
         <li><?= $this->Html->link(__('List Roles'), ['controller' => 'Roles', 'action' => 'index']) ?></li>
 	<li><?= $this->Html->link(__('New Role'), ['controller' => 'Roles', 'action' => 'add']) ?></li>
 	<hr>
+        <li class="heading"><?= __('Architectural Images') ?></li>
+        <li><?= $this->Html->link(__('List Architectural Images'), ['controller' => 'ArchitecturalImages', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Architectural Image'), ['controller' => 'ArchitecturalImages', 'action' => 'add']) ?></li>
+	<hr>
         <li class="heading"><?= __('Portraits') ?></li>
         <li><?= $this->Html->link(__('List Portraits'), ['controller' => 'Portraits', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('New Portrait'), ['controller' => 'Portraits', 'action' => 'add']) ?></li>

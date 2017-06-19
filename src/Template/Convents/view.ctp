@@ -207,7 +207,7 @@
 	   <td><? // Image
 	   if ($image->image_dir && $image->image) { 
 	     $img_url = preg_replace("/webroot/","",$image->image_dir) . $image->image;
-	     print $this->Html->link( $this->Html->image($img_url), ['controller' => 'ArchitecturalImages', 'action' => 'view', $image->id], ['escape' => false]);
+	     print $this->Html->link( $this->Html->image($img_url, ['class'=>'index-thumb']), ['controller' => 'ArchitecturalImages', 'action' => 'view', $image->id], ['escape' => false]);
 	   }
 	   ?></td>
 	   

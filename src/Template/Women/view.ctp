@@ -146,7 +146,12 @@
 
 
                 <td><?= $circa.h($portraits->date_painted) ?></td>
-                <td><?= h($portraits->image) ?></td>
+                <td><?
+	      if ($portraits->image_dir && $portraits->image) {
+		$img_url = preg_replace("/webroot/","",$portraits->image_dir) . $portraits->image;
+		print $this->Html->link( $this->Html->image($img_url, ['class'=>'index-thumb']), ['controller' => 'Portraits', 'action' => 'view', $portraits->id], ['escape' => false]);
+	      }
+	      ?></td>
                 <td><?= h($portraits->created) ?></td>
                 <td><?= h($portraits->modified) ?></td>
                 <td class="actions">

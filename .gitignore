@@ -4,3 +4,4 @@ config/app.php
 webroot/css/local.css
 webroot/files/*
 *~
+*.bak

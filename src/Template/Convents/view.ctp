@@ -163,7 +163,7 @@
                 <td>
 	   <? 
 	   if ($image->image_url) {
-	     print '<a href="'.h($image->image_url).'">Link</a>';
+	     print $this->Html->link('Link',h($image->image_url),['target'=>'external']);
 	   }
 
 	   ?></td>

@@ -32,7 +32,7 @@
                 <td><?= h($portrait->title) ?></td>
                 <td><?= $portrait->has('woman') ? $this->Html->link($portrait->woman->name, ['controller' => 'Women', 'action' => 'view', $portrait->woman->id]) : '' ?></td>
                 <td><?= h($portrait->painter) ?></td>
-                <td><? if($portrait->painter_viaf) { print '<a target="viaf" href="'. h($portrait->painter_viaf) .'">VIAF</a>'; } ?></td>
+    <td><? if($portrait->painter_viaf) { print $this->Html->link('VIAF', h($portrait->painter_viaf), ['target'=>'external']); } ?></td>
                 <td><? if($portrait->date_painted_approx == 1) { print 'ca. ';} ?><?= h($portrait->date_painted) ?></td>  
     	 	<? $img_url = preg_replace("/webroot/","",$portrait->image_dir) .'/'. $portrait->image; ?> 
 	 	

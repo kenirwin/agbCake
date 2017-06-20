@@ -24,7 +24,7 @@
         </tr>
         <tr>
             <th scope="row"><?= __('Viaf Url') ?></th>
-            <td><? if ($woman->viaf_url) { print '<a target="viaf" href="'.h($woman->viaf_url).'">'.h($woman->viaf_url).'</a>'; } ?></td>
+    <td><? if ($woman->viaf_url) { print $this->Html->link(h($woman->viaf_url), h($woman->viaf_url),['target'=>'external']); } ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Name English') ?></th>
@@ -135,7 +135,7 @@
                 <td><?= h($portrait->id) ?></td>
                 <td><?= h($portrait->title) ?></td>
                 <td><?= h($portrait->painter) ?></td>
-                <td><? if($portrait->painter_viaf) { print '<a target="viaf" href="'. h($portrait->painter_viaf) .'">VIAF</a>'; } ?></td>
+	   <td><? if($portrait->painter_viaf) { print $this->Html->link('VIAF', h($portrait->painter_viaf), ['target'=>'external']); } ?></td>
 
 	   <? 
 	   if ($portrait->date_painted_approx == 1) { $circa = 'ca. '; }

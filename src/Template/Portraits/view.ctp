@@ -34,7 +34,7 @@
         </tr>
         <tr>
             <th scope="row"><?= __('Painter Viaf') ?></th>
-            <td><? if ($portrait->painter_viaf) { print '<a target="viaf" href="'.h($portrait->painter_viaf).'">'.h($portrait->painter_viaf).'</a>'; } ?></td>
+    <td><? if ($portrait->painter_viaf) { print $this->Html->link(h($portrait->painter_viaf),h($portrait->painter_viaf),['target'=>'external']); } ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Date Painted') ?></th>

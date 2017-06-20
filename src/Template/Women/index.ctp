@@ -33,7 +33,7 @@
             <tr>
                 <td><?= $this->Number->format($woman->id) ?></td>
                 <td><?= h($woman->name) ?></td>
-                <td><? if ($woman->viaf_url) { print '<a target="viaf" href="'.h($woman->viaf_url).'">VIAF</a>'; } ?></td>
+    <td><? if ($woman->viaf_url) { print $this->Html->link('VIAF',h($woman->viaf_url),['target'=>'external']); } ?></td>
                 <td><?= h($woman->name_english) ?></td>
                 <td><?= h($woman->name_spanish) ?></td>
                 <td><?= h($woman->name_portuguese) ?></td>

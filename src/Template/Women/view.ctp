@@ -133,7 +133,7 @@
             <?php foreach ($woman->portraits as $portrait): ?>
             <tr>
                 <td><?= h($portrait->id) ?></td>
-                <td><?= h($portrait->title) ?></td>
+	   <td><?= $this->Html->link(h($portrait->title),['controller'=>'Portraits','action'=>'view',$portrait->id]) ?></td>
                 <td><?= h($portrait->painter) ?></td>
 	   <td><? if($portrait->painter_viaf) { print $this->Html->link('VIAF', h($portrait->painter_viaf), ['target'=>'external']); } ?></td>
 

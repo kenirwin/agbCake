@@ -29,7 +29,7 @@
             <?php foreach ($portraits as $portrait): ?>
             <tr>
                 <td><?= $this->Number->format($portrait->id) ?></td>
-                <td><?= h($portrait->title) ?></td>
+	        <td><?= $this->Html->link(h($portrait->title),['controller'=>'Portraits','action'=>'view',$portrait->id]) ?></td>
                 <td><?= $portrait->has('woman') ? $this->Html->link($portrait->woman->name, ['controller' => 'Women', 'action' => 'view', $portrait->woman->id]) : '' ?></td>
                 <td><?= h($portrait->painter) ?></td>
     <td><? if($portrait->painter_viaf) { print $this->Html->link('VIAF', h($portrait->painter_viaf), ['target'=>'external']); } ?></td>

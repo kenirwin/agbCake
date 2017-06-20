@@ -47,20 +47,18 @@
             <td><?= h($woman->religious_order) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Birth Approx') ?></th>
-            <td><? if ($woman->birth_approx == 1) { print 'circa'; } ?></td>
-        </tr>
-        <tr>
             <th scope="row"><?= __('Birth Year') ?></th>
-            <td><?= h($woman->birth_year) ?></td>
+            <td>
+            <? if ($woman->birth_approx == 1) { print 'circa '; } ?>
+	    <?= h($woman->birth_year) ?>
+            </td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Death Approx') ?></th>
-            <td><? if ($woman->death_approx == 1) { print 'circa'; } ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Death Year') ?></th>
-            <td><?= h($woman->death_year) ?></td>
+    <th scope="row"><?= __('Death Year') ?></th>
+    <td>
+    <? if ($woman->death_approx == 1) { print 'circa'; } ?>
+    <?= h($woman->death_year) ?>
+    </td>
         </tr>
         <tr>
             <th scope="row"><?= __('Created') ?></th>
@@ -113,6 +111,8 @@
             </tr>
             <?php endforeach; ?>
         </table>
+	<?php else: ?>
+		<div class="nothing_to_list">No related roles to show.</div>
         <?php endif; ?>
     </div>
 
@@ -162,7 +162,10 @@
             </tr>
             <?php endforeach; ?>
         </table>
+	<?php else: ?>
+		<div class="nothing_to_list">No related portraits to show.</div>
         <?php endif; ?>
+
     </div>
 
 </div>

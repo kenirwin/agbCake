@@ -23,7 +23,7 @@
         </tr>
         <tr>
             <th scope="row"><?= __('Viaf Url') ?></th>
-            <td><?= h($religiousOrder->viaf_url) ?></td>
+    <td><?= $this->Html->link(h($religiousOrder->viaf_url), $religiousOrder->viaf_url, ['target'=>'viaf'] ); ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Id') ?></th>

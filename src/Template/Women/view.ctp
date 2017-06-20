@@ -112,7 +112,7 @@
             <?php endforeach; ?>
         </table>
 	<?php else: ?>
-		<div class="nothing_to_list">No related roles to show.</div>
+		<div class="nothing-to-list">No related roles to show.</div>
         <?php endif; ?>
     </div>
 
@@ -163,7 +163,7 @@
             <?php endforeach; ?>
         </table>
 	<?php else: ?>
-		<div class="nothing_to_list">No related portraits to show.</div>
+		<div class="nothing-to-list">No related portraits to show.</div>
         <?php endif; ?>
 
     </div>

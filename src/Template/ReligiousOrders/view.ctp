@@ -61,6 +61,8 @@
             </tr>
             <?php endforeach; ?>
         </table>
+	<?php else: ?>
+		<div class="nothing-to-list">No related convents to show.</div>
         <?php endif; ?>
     </div>
 

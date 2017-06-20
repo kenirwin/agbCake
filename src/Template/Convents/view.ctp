@@ -74,44 +74,6 @@
         </tr>
     </table>
 
-<!--
-    <div class="related">
-        <h4><?= __('Related Women') ?></h4>
-        <?php if (!empty($convent->women)): ?>
-        <table cellpadding="0" cellspacing="0">
-            <tr>
-                <th scope="col"><?= __('Id') ?></th>
-                <th scope="col"><?= __('Name') ?></th>
-                <th scope="col"><?= __('Birth Year') ?></th>
-                <th scope="col"><?= __('Death Year') ?></th>
-                <th scope="col" class="actions"><?= __('Actions') ?></th>
-            </tr>
-            <?php foreach ($convent->women as $women): ?>
-            <tr>
-                <td><?= h($women->id) ?></td>
-                <td><?= $this->Html->link( h($women->name), ['controller' => 'Women', 'action' => 'view', $women->id]) ?></td>
-                <? 
-		if ($women->birth_approx == 1) { 
-		$birth_circa = 'ca. '; }
-		else { $birth_circa = ''; }
-		if ($women->death_approx == 1) { 
-		$death_circa = 'ca. '; }
-		else { $death_circa = ''; }
-		?>
-                <td><?= h($birth_circa . $women->birth_year) ?></td>
-                <td><?= h($death_circa . $women->death_year) ?></td>
-                <td class="actions">
-                    <?= $this->Html->link(__('View'), ['controller' => 'Women', 'action' => 'view', $women->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['controller' => 'Women', 'action' => 'edit', $women->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'Women', 'action' => 'delete', $women->id], ['confirm' => __('Are you sure you want to delete # {0}?', $women->id)]) ?>
-                </td>
-            </tr>
-            <?php endforeach; ?>
-        </table>
-        <?php endif; ?>
-    </div>
--->
-
 <div class="related">
         <h4><?= __('Related Roles') ?></h4>
         <?php if (!empty($convent->roles)): ?>
@@ -145,14 +107,14 @@
             </tr>
             <?php endforeach; ?>
         </table>
+	<?php else: ?>
+		<div class="nothing-to-list">No related roles to show.</div>
         <?php endif; ?>
     </div>
 
 
 <div class="related">
         <h4><?= __('Related Religious Orders') ?></h4>
-	      <pre>
-    </pre>
         <?php if (!empty($convent->religious_orders)): ?>
         <table cellpadding="0" cellspacing="0">
             <tr>
@@ -174,7 +136,8 @@
             </tr>
             <?php endforeach; ?>
         </table>
-        <?php endif; ?>
+	<?php else: ?>
+		<div class="nothing-to-list">No related religious orders to show.</div>        <?php endif; ?>
     </div>
 
 
@@ -219,6 +182,8 @@
             </tr>
             <?php endforeach; ?>
         </table>
+	<?php else: ?>
+		<div class="nothing-to-list">No related architectural images to show.</div>
         <?php endif; ?>
     </div>
 

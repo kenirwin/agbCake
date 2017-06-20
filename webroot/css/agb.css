@@ -1,3 +1,7 @@
+.content h4 {
+    color: #1798A5;
+    border-bottom-color: #1798A5;
+}
 table td {
     word-break: normal !important;
 }

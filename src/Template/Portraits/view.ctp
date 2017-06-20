@@ -37,12 +37,11 @@
             <td><? if ($portrait->painter_viaf) { print '<a target="viaf" href="'.h($portrait->painter_viaf).'">'.h($portrait->painter_viaf).'</a>'; } ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Date Painted Approx') ?></th>
-            <td><? if($portrait->date_painted_approx == 1) {print 'circa';} ?></td>
-        </tr>
-        <tr>
             <th scope="row"><?= __('Date Painted') ?></th>
-            <td><?= h($portrait->date_painted) ?></td>
+            <td>
+    <? if($portrait->date_painted_approx == 1) {print 'circa ';} ?>
+    <?= h($portrait->date_painted) ?>
+    </td>
         </tr>
         <tr>
             <th scope="row"><?= __('Image Dir') ?></th>

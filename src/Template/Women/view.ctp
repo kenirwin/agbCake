@@ -128,36 +128,32 @@
                 <th scope="col"><?= __('Painter Viaf') ?></th>
                 <th scope="col"><?= __('Date Painted') ?></th>
                 <th scope="col"><?= __('Image') ?></th>
-                <th scope="col"><?= __('Created') ?></th>
-                <th scope="col"><?= __('Modified') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
-            <?php foreach ($woman->portraits as $portraits): ?>
+            <?php foreach ($woman->portraits as $portrait): ?>
             <tr>
-                <td><?= h($portraits->id) ?></td>
-                <td><?= h($portraits->title) ?></td>
-                <td><?= h($portraits->painter) ?></td>
-                <td><? if($portraits->painter_viaf) { print '<a target="viaf" href="'. h($portraits->painter_viaf) .'">VIAF</a>'; } ?></td>
+                <td><?= h($portrait->id) ?></td>
+                <td><?= h($portrait->title) ?></td>
+                <td><?= h($portrait->painter) ?></td>
+                <td><? if($portrait->painter_viaf) { print '<a target="viaf" href="'. h($portrait->painter_viaf) .'">VIAF</a>'; } ?></td>
 
 	   <? 
-	   if ($portraits->date_painted_approx == 1) { $circa = 'ca. '; }
+	   if ($portrait->date_painted_approx == 1) { $circa = 'ca. '; }
 	   else { $circa = ''; }
 ?>
 
 
-                <td><?= $circa.h($portraits->date_painted) ?></td>
+                <td><?= $circa.h($portrait->date_painted) ?></td>
                 <td><?
-	      if ($portraits->image_dir && $portraits->image) {
-		$img_url = preg_replace("/webroot/","",$portraits->image_dir) . $portraits->image;
-		print $this->Html->link( $this->Html->image($img_url, ['class'=>'index-thumb']), ['controller' => 'Portraits', 'action' => 'view', $portraits->id], ['escape' => false]);
+	      if ($portrait->image_dir && $portrait->image) {
+		$img_url = preg_replace("/webroot/","",$portrait->image_dir) . $portrait->image;
+		print $this->Html->link( $this->Html->image($img_url, ['class'=>'index-thumb']), ['controller' => 'Portraits', 'action' => 'view', $portrait->id], ['escape' => false]);
 	      }
 	      ?></td>
-                <td><?= h($portraits->created) ?></td>
-                <td><?= h($portraits->modified) ?></td>
                 <td class="actions">
-                    <?= $this->Html->link(__('View'), ['controller' => 'Portraits', 'action' => 'view', $portraits->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['controller' => 'Portraits', 'action' => 'edit', $portraits->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'Portraits', 'action' => 'delete', $portraits->id], ['confirm' => __('Are you sure you want to delete # {0}?', $portraits->id)]) ?>
+                    <?= $this->Html->link(__('View'), ['controller' => 'Portraits', 'action' => 'view', $portrait->id]) ?>
+                    <?= $this->Html->link(__('Edit'), ['controller' => 'Portraits', 'action' => 'edit', $portrait->id]) ?>
+                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'Portraits', 'action' => 'delete', $portrait->id], ['confirm' => __('Are you sure you want to delete # {0}?', $portrait->id)]) ?>
                 </td>
             </tr>
             <?php endforeach; ?>

@@ -13,7 +13,7 @@
     </ul>
 </nav>
 <div class="roles view large-10 medium-9 columns content">
-    <h3><?= h($role->id) ?></h3>
+    <h3><?= $role->woman->name .' as '. $role->role .' @ '. $role->convent->name ?></h3>
     <table class="vertical-table">
         <tr>
             <th scope="row"><?= __('Woman') ?></th>

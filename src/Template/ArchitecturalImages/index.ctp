@@ -33,7 +33,7 @@
                 <td><?= h($architecturalImage->title) ?></td>
                 <td><?= $architecturalImage->has('convent') ? $this->Html->link($architecturalImage->convent->name, ['controller' => 'Convents', 'action' => 'view', $architecturalImage->convent->id]) : '' ?></td>
                 <td><?= h($architecturalImage->image_type) ?></td>
-    <td><? if (strlen($architecturalImage->image_url)>0) { print $this->Html->link('Link', $architecturalImage->image_url, ['target'=>'external']); } ?></td>
+    <td><? if (strlen($architecturalImage->image_url)>0) { print $this->Html->link('Link', h($architecturalImage->image_url), ['target'=>'external']); } ?></td>
                 <td>
     <? 
     if (preg_match('/files/',$img_url)) { 	

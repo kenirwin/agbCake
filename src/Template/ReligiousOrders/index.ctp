@@ -26,7 +26,7 @@
             <tr>
                 <td><?= $this->Number->format($religiousOrder->id) ?></td>
                 <td><?= h($religiousOrder->name) ?></td>
-    <td><?= $this->Html->link('VIAF', $religiousOrder->viaf_url, ['target'=>'external']); ?></td>
+    <td><?= $this->Html->link('VIAF', h($religiousOrder->viaf_url), ['target'=>'external']); ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $religiousOrder->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $religiousOrder->id]) ?>

@@ -41,8 +41,8 @@
                 <td><?= h($convent->name_other) ?></td>
                 <td><?= h($convent->city) ?></td>
                 <td><?= h($convent->country) ?></td>
-                <td><?= h($convent->date_founding); ?></td>
-                <td><?= h($convent->date_closing); ?></td>
+                <td class="index-date"><?= h($convent->date_founding); ?></td>
+                <td class="index-date"><?= h($convent->date_closing); ?></td>
                 <td><?= h($convent->latitude) ?></td>
                 <td><?= h($convent->longitude) ?></td>
                 <td class="actions">

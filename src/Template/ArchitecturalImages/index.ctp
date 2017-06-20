@@ -22,8 +22,6 @@
                 <th scope="col"><?= $this->Paginator->sort('image_url') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('image') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('image_source') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('created') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('modified') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
         </thead>
@@ -35,19 +33,17 @@
                 <td><?= h($architecturalImage->title) ?></td>
                 <td><?= $architecturalImage->has('convent') ? $this->Html->link($architecturalImage->convent->name, ['controller' => 'Convents', 'action' => 'view', $architecturalImage->convent->id]) : '' ?></td>
                 <td><?= h($architecturalImage->image_type) ?></td>
-    <td><? if (strlen($architecturalImage->image_url)>0) { print '<a href="'.h($architecturalImage->image_url).'">Link</a>'; } ?></td>
+    <td><? if (strlen($architecturalImage->image_url)>0) { print $this->Html->link('Link', $architecturalImage->image_url, ['target'=>'external']); } ?></td>
                 <td>
     <? 
     if (preg_match('/files/',$img_url)) { 	
       $image_link = $this->Html->image($img_url, ['alt' => $architecturalImage->title, 'class' => 'index-thumb']); 
-      print $this->Html->link($image_link, ['action'=>'view', $architecturalImage->id], ['escape'=>false]);
+      print $this->Html->link($image_link, ['action'=>'view', $architecturalImage->id], ['escape'=>false,'target'=>'external']);
     }
 ?>
 
 		</td>
                 <td><?= h($architecturalImage->image_source) ?></td>
-                <td><?= h($architecturalImage->created) ?></td>
-                <td><?= h($architecturalImage->modified) ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $architecturalImage->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $architecturalImage->id]) ?>

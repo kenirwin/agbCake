@@ -20,7 +20,6 @@
                 <th scope="col"><?= $this->Paginator->sort('woman_id') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('painter') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('painter_viaf') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('date_painted_approx') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('date_painted') ?></th>
                 <th scope="col">Image</th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
@@ -34,8 +33,7 @@
                 <td><?= $portrait->has('woman') ? $this->Html->link($portrait->woman->name, ['controller' => 'Women', 'action' => 'view', $portrait->woman->id]) : '' ?></td>
                 <td><?= h($portrait->painter) ?></td>
                 <td><? if($portrait->painter_viaf) { print '<a target="viaf" href="'. h($portrait->painter_viaf) .'">VIAF</a>'; } ?></td>
-                <td><? if($portrait->date_painted_approx == 1) { print 'ca.';} ?></td>
-                <td><?= h($portrait->date_painted) ?></td>  
+                <td><? if($portrait->date_painted_approx == 1) { print 'ca. ';} ?><?= h($portrait->date_painted) ?></td>  
     	 	<? $img_url = preg_replace("/webroot/","",$portrait->image_dir) .'/'. $portrait->image; ?> 
 	 	
                 <td>

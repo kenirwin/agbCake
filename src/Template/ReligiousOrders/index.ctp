@@ -18,8 +18,6 @@
                 <th scope="col"><?= $this->Paginator->sort('id') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('name') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('viaf_url') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('created') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('modified') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
         </thead>
@@ -28,9 +26,7 @@
             <tr>
                 <td><?= $this->Number->format($religiousOrder->id) ?></td>
                 <td><?= h($religiousOrder->name) ?></td>
-                <td><?= h($religiousOrder->viaf_url) ?></td>
-                <td><?= h($religiousOrder->created) ?></td>
-                <td><?= h($religiousOrder->modified) ?></td>
+    <td><?= $this->Html->link('VIAF', $religiousOrder->viaf_url, ['target'=>'external']); ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $religiousOrder->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $religiousOrder->id]) ?>

@@ -21,8 +21,6 @@
                 <th scope="col"><?= $this->Paginator->sort('role') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('start_year') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('end_year') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('created') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('modified') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
         </thead>
@@ -33,10 +31,8 @@
                 <td><?= $role->has('woman') ? $this->Html->link($role->woman->name, ['controller' => 'Women', 'action' => 'view', $role->woman->id]) : '' ?></td>
                 <td><?= $role->has('convent') ? $this->Html->link($role->convent->name, ['controller' => 'Convents', 'action' => 'view', $role->convent->id]) : '' ?></td>
                 <td><?= h($role->role) ?></td>
-                <td><?= h($role->start_year) ?></td>
-                <td><?= h($role->end_year) ?></td>
-                <td><?= h($role->created) ?></td>
-                <td><?= h($role->modified) ?></td>
+                <td class="index-date"><?= h($role->start_year) ?></td>
+                <td class="index-date"><?= h($role->end_year) ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $role->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $role->id]) ?>

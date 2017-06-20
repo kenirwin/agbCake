@@ -22,9 +22,7 @@
                 <th scope="col"><?= $this->Paginator->sort('name_spanish') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('name_portuguese') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('name_other') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('birth_approx') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('birth_year') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('death_approx') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('death_year') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('religious_order') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
@@ -40,10 +38,8 @@
                 <td><?= h($woman->name_spanish) ?></td>
                 <td><?= h($woman->name_portuguese) ?></td>
                 <td><?= h($woman->name_other) ?></td>
-                <td><? if ($woman->birth_approx == 1) { print 'ca.'; } ?></td>
-                <td><?= h($woman->birth_year) ?></td>
-                <td><? if ($woman->death_approx == 1) { print 'ca.'; } ?></td>
-                <td><?= h($woman->death_year) ?></td>
+                <td class="index-date"><? if ($woman->birth_approx == 1) { print 'ca. '; } ?><?= h($woman->birth_year) ?></td>
+                <td class="index-date"><? if ($woman->death_approx == 1) { print 'ca. '; } ?><?= h($woman->death_year) ?></td>
                 <td><?= h($woman->religious_order) ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $woman->id]) ?>

@@ -15,6 +15,10 @@
         <li><?= $this->Html->link(__('List Architectural Images'), ['controller' => 'ArchitecturalImages', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('New Architectural Image'), ['controller' => 'ArchitecturalImages', 'action' => 'add']) ?></li>
 	<hr>
+        <li class="heading"><?= __('Architectural Styles') ?></li>
+        <li><?= $this->Html->link(__('List Architectural Styles'), ['controller' => 'ArchitecturalStyles', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Architectural Styles'), ['controller' => 'ArchitecturalStyles', 'action' => 'add']) ?></li>
+	<hr>
         <li class="heading"><?= __('Portraits') ?></li>
         <li><?= $this->Html->link(__('List Portraits'), ['controller' => 'Portraits', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('New Portrait'), ['controller' => 'Portraits', 'action' => 'add']) ?></li>

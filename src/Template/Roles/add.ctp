@@ -19,6 +19,8 @@
             echo $this->Form->control('role');
             echo $this->Form->control('start_year');
             echo $this->Form->control('end_year');
+            echo $this->Form->control('style_id', ['options' => $styles]);
+
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>

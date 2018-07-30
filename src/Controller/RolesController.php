@@ -57,8 +57,9 @@ class RolesController extends AppController
             $this->Flash->error(__('The role could not be saved. Please, try again.'));
         }
         $women = $this->Roles->Women->find('list', ['limit' => 200]);
-        $convents = $this->Roles->Convents->find('list', ['limit' => 200]);
-        $this->set(compact('role', 'women', 'convents'));
+	$convents = $this->Roles->Convents->find('list', ['limit' => 200]);
+	$styles =  $this->Roles->ArchitecturalStyles->find('list', ['limit' => 200]);
+        $this->set(compact('role', 'women', 'convents','styles'));
         $this->set('_serialize', ['role']);
     }
 

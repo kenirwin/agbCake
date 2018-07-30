@@ -5,3 +5,4 @@ webroot/css/local.css
 webroot/files/*
 *~
 *.bak
+error_log

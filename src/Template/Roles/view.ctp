@@ -24,6 +24,10 @@
             <td><?= $role->has('convent') ? $this->Html->link($role->convent->name, ['controller' => 'Convents', 'action' => 'view', $role->convent->id]) : '' ?></td>
         </tr>
         <tr>
+            <th scope="row"><?= __('Architectural Style') ?></th>
+            <td><?= $role->has('architectural_style') ? $this->Html->link($role->architectural_style->name, ['controller' => 'ArchitecturalStyles', 'action' => 'view', $role->architectural_style->id]) : '' ?></td>
+        </tr>
+        <tr>
             <th scope="row"><?= __('Role') ?></th>
             <td><?= h($role->role) ?></td>
         </tr>

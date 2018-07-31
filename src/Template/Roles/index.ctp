@@ -21,6 +21,7 @@
                 <th scope="col"><?= $this->Paginator->sort('role') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('start_year') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('end_year') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('style_id') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
         </thead>
@@ -33,6 +34,7 @@
                 <td><?= h($role->role) ?></td>
                 <td class="index-date"><?= h($role->start_year) ?></td>
                 <td class="index-date"><?= h($role->end_year) ?></td>
+    <td><?= $role->has('architectural_style') ? $this->Html->link($role->architectural_style->name, ['controller' => 'ArchitecturalStyles', 'action' => 'view', $role->architectural_style->id]) : '' ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $role->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $role->id]) ?>

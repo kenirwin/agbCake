@@ -14,7 +14,7 @@ class RolesController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['Women', 'Convents']
+			   'contain' => ['Women', 'Convents', 'ArchitecturalStyles']
         ];
         $roles = $this->paginate($this->Roles);
 
@@ -32,7 +32,7 @@ class RolesController extends AppController
     public function view($id = null)
     {
         $role = $this->Roles->get($id, [
-            'contain' => ['Women', 'Convents']
+	   'contain' => ['Women', 'Convents', 'ArchitecturalStyles']
         ]);
 
         $this->set('role', $role);
@@ -86,7 +86,8 @@ class RolesController extends AppController
         }
         $women = $this->Roles->Women->find('list', ['limit' => 200]);
         $convents = $this->Roles->Convents->find('list', ['limit' => 200]);
-        $this->set(compact('role', 'women', 'convents'));
+	$styles =  $this->Roles->ArchitecturalStyles->find('list', ['limit' => 200]);
+        $this->set(compact('role', 'women', 'convents','styles'));
         $this->set('_serialize', ['role']);
     }
 

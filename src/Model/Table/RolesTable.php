@@ -33,8 +33,9 @@ class RolesTable extends Table
             'foreignKey' => 'convent_id',
             'joinType' => 'INNER'
         ]);
-	$this->hasOne('ArchitecturalStyles')
-	  ->foreignKey('style_id');
+	$this->belongsTo('ArchitecturalStyles', [
+	    'foreignKey' => 'style_id',
+        ]);
 
     }
 
@@ -59,7 +60,7 @@ class RolesTable extends Table
         $validator
             ->allowEmpty('end_year');
 	$validator
-	  ->allowEmpty('style_id');
+ 	    ->allowEmpty('style_id');
 
         return $validator;
     }

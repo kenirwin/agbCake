@@ -38,7 +38,9 @@ class ArchitecturalStylesTable extends Table
 
         $this->addBehavior('Timestamp');
 	
-	$this->belongsToMany('Roles');
+	$this->hasMany('Roles',[
+				'foreignKey'=>'style_id'
+]);
     }
 
     /**

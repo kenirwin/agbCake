@@ -34,3 +34,11 @@
         </tr>
     </table>
 </div>
+
+<?
+    $roles = $architecturalStyle->roles;
+foreach($roles as $role) {
+  print '<p>'.$role.'</p>';
+}
+    var_dump($architecturalStyle);
+?>

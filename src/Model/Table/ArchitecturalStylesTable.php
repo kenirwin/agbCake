@@ -41,6 +41,10 @@ class ArchitecturalStylesTable extends Table
 	$this->hasMany('Roles',[
 				'foreignKey'=>'style_id'
 ]);
+	$this->belongsToMany('Women',[
+				      'through'=>'Roles',
+				      'foreignKey'=>'style_id'
+				]);
     }
 
     /**

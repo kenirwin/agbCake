@@ -36,7 +36,7 @@ class ArchitecturalStylesController extends AppController
     public function view($id = null)
     {
         $architecturalStyle = $this->ArchitecturalStyles->get($id, [
-            'contain' => ['Roles']
+								    'contain' => ['Roles','Women']
         ]);
 
         $this->set('architecturalStyle', $architecturalStyle);

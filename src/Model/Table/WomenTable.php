@@ -34,8 +34,13 @@ class WomenTable extends Table
         $this->belongsToMany('Convents', [
 				       'through' => 'Roles'
         ]);
-    }
 
+	$this->belongsToMany('ArchitecturalStyles', [
+						     'through'=>'Roles',
+						     'foreignKey'=>'woman_id'
+						     ]);
+    }
+    
     /**
      * Default validation rules.
      *

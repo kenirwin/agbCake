@@ -36,6 +36,10 @@
 </div>
 
 <?
+    $women = $architecturalStyle->women;
+foreach($women as $woman) {
+  print '<p>'.$woman.'</p>';
+}
     $roles = $architecturalStyle->roles;
 foreach($roles as $role) {
   print '<p>'.$role.'</p>';

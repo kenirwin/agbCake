@@ -28,11 +28,18 @@
             echo $this->Form->control('name_other');
             echo $this->Form->control('birth_approx', ['type' => 'checkbox']);
             echo $this->Form->control('birth_year', ['type' => 'text']);
+            echo $this->Form->control('birth_place');            
             echo $this->Form->control('death_approx', ['type' => 'checkbox']);
             echo $this->Form->control('death_year', ['type' => 'text']);
+            echo $this->Form->control('death_place');            
+echo $this->Form->control('binche', ['type' => 'checkbox', 'label' => 'Traveled to Binche']);
+echo $this->Form->control('binche_note', ['label' => 'Binche Travel Note']);
+echo $this->Form->control('read_diana', ['type' => 'checkbox', 'label' => 'Read the Diana']);
+echo $this->Form->control('diana_note', ['label' => 'Diana Note']);
             echo $this->Form->control('related_to');
             echo $this->Form->control('religious_order');
             echo $this->Form->control('notes');
+            echo $this->Form->control('sources');
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>

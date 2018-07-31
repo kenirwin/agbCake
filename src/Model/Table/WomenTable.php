@@ -72,9 +72,15 @@ class WomenTable extends Table
             ->integer('birth_approx')
             ->allowEmpty('birth_approx');
 
+	$validator
+	  ->allowEmpty('birth_place');
+
         $validator
             ->integer('birth_year')
             ->allowEmpty('birth_year');
+
+	$validator
+	  ->allowEmpty('death_place');
 
         $validator
             ->integer('death_approx')
@@ -90,8 +96,23 @@ class WomenTable extends Table
         $validator
             ->allowEmpty('religious_order');
 
+	$validator
+	  ->allowEmpty('binche');
+
+	$validator
+	  ->allowEmpty('binche_note');
+
+	$validator
+	  ->allowEmpty('read_diana');
+
+	$validator
+	  ->allowEmpty('diana_note');
+
         $validator
             ->allowEmpty('notes');
+
+	$validator
+	  ->allowEmpty('sources');
 
         return $validator;
     }

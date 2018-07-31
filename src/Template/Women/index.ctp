@@ -23,7 +23,11 @@
                 <th scope="col"><?= $this->Paginator->sort('name_portuguese') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('name_other') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('birth_year') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('birth_place') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('death_year') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('death_place') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('binche') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('read_diana') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('religious_order') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
@@ -39,7 +43,25 @@
                 <td><?= h($woman->name_portuguese) ?></td>
                 <td><?= h($woman->name_other) ?></td>
                 <td class="index-date"><? if ($woman->birth_approx == 1) { print 'ca. '; } ?><?= h($woman->birth_year) ?></td>
+                <td><?= h($woman->birth_place) ?></td>
                 <td class="index-date"><? if ($woman->death_approx == 1) { print 'ca. '; } ?><?= h($woman->death_year) ?></td>
+                <td><?= h($woman->birth_place) ?></td>
+                <td>
+<?
+    if ($woman->binche == 1) { echo "Y"; 
+			       //		       if (isset($woman->binche_note)) { echo ': '. h($woman->binche_note); }
+    }  
+elseif ($woman->binche === 0) { echo "N"; }
+?>
+                </td>
+                <td>
+<?
+    if ($woman->read_diana == 1) { echo "Y"; 
+			       //		       if (isset($woman->diana_note)) { echo ': '. h($woman->diana_note); }
+    }  
+elseif ($woman->read_diana === 0) { echo "N"; }
+?>
+                </td>
                 <td><?= h($woman->religious_order) ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $woman->id]) ?>

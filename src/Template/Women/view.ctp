@@ -54,11 +54,43 @@
             </td>
         </tr>
         <tr>
+            <th scope="row"><?= __('Birth Place') ?></th>
+            <td><?= h($woman->birth_place) ?></td>
+        </tr>
+        <tr>
     <th scope="row"><?= __('Death Year') ?></th>
     <td>
     <? if ($woman->death_approx == 1) { print 'circa'; } ?>
     <?= h($woman->death_year) ?>
     </td>
+        </tr>
+        <tr>
+            <th scope="row"><?= __('Death Place') ?></th>
+            <td><?= h($woman->death_place) ?></td>
+        </tr>
+        <tr>
+            <th scope="row"><?= __('Travelled to Binche') ?></th>
+    <td>
+<? 
+    if ($woman->binche == 1) { echo "Yes"; 
+			       if (isset($woman->binche_note)) { echo ': '. h($woman->binche_note); }
+    }  
+elseif ($woman->binche === 0) { echo "No"; }
+else { echo "Unknown"; }
+?>
+     </td>
+        </tr>
+        <tr>
+            <th scope="row"><?= __('Read the Diana') ?></th>
+    <td>
+<? 
+    if ($woman->read_diana == 1) { echo "Yes"; 
+				    if (isset($woman->diana_note)) { echo ': '. h($woman->diana_note); }
+    }  
+elseif ($woman->read_diana === 0) { echo "No"; }
+else { echo "Unknown"; }
+?>
+     </td>
         </tr>
         <tr>
             <th scope="row"><?= __('Created') ?></th>
@@ -76,6 +108,10 @@
     <div class="row">
         <h4><?= __('Notes') ?></h4>
         <?= $this->Text->autoParagraph(h($woman->notes)); ?>
+    </div>
+    <div class="row">
+        <h4><?= __('Sources') ?></h4>
+        <?= $this->Text->autoParagraph(h($woman->sources)); ?>
     </div>
 
 

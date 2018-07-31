@@ -27,6 +27,9 @@
             echo $this->Form->control('longitude');
             echo $this->Form->control('women._ids', ['options' => $women]);
 echo $this->Form->control('religious_orders._ids', ['options' => $religious_orders]);
+            echo $this->Form->control('notes');
+            echo $this->Form->control('sources');
+
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>

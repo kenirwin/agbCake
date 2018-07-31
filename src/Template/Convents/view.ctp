@@ -74,6 +74,17 @@
         </tr>
     </table>
 
+    <div class="row">
+        <h4><?= __('Notes') ?></h4>
+        <?= $this->Text->autoParagraph(h($convent->notes)); ?>
+    </div>
+    <div class="row">
+        <h4><?= __('Sources') ?></h4>
+        <?= $this->Text->autoParagraph(h($convent->sources)); ?>
+    </div>
+
+
+
 <div class="related">
         <h4><?= __('Related Roles') ?></h4>
         <?php if (!empty($convent->roles)): ?>

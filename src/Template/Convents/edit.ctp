@@ -32,7 +32,6 @@
             echo $this->Form->control('date_closing', ['type'=>'text']);
             echo $this->Form->control('latitude');
             echo $this->Form->control('longitude');
-
 $curr_orders = array();
 foreach($convent->affiliations as $affil) {
   array_push($curr_orders, $affil->religious_order_id);
@@ -43,8 +42,12 @@ echo $this->Form->control('religious_orders._ids', array(
 						  'type'=> 'select',
 						  'value'=> $curr_orders
 						  ));
-        ?>
+
+            echo $this->Form->control('notes');
+            echo $this->Form->control('sources');
+?>
     </fieldset>
+
     <?= $this->Form->button(__('Submit')) ?>
     <?= $this->Form->end() ?>
 </div>

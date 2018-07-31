@@ -88,6 +88,12 @@ class ConventsTable extends Table
         $validator
             ->allowEmpty('longitude');
 
+        $validator
+            ->allowEmpty('sources');
+
+        $validator
+            ->allowEmpty('notes');
+
         return $validator;
     }
 

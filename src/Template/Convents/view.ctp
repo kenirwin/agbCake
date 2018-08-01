@@ -114,9 +114,10 @@
 	      if (isset($role->style_id)) {
 		foreach ($convent->architectural_styles as $style) {
 		  if ($style->id == $role->style_id) { 
-		    echo $this->Html->link(h($style->name), ['controller' => 'ArchitecturalStyles', 'action' => 'view', $role->style_id]);
+		    $curr_style = $style->name;
 		  }
 		}
+		echo $this->Html->link(h($curr_style), ['controller' => 'ArchitecturalStyles', 'action' => 'view', $role->style_id]);
 	      }
 ?>
 	        </td>

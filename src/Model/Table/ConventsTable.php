@@ -33,7 +33,10 @@ class ConventsTable extends Table
 				       'through' => 'Roles'
 
         ]);
-	
+	$this->belongsToMany('ArchitecturalStyles', [
+						     'through'=>'Roles',
+						     'foreignKey'=>'convent_id'
+						     ]);
 	$this->hasMany('Affiliations');
 	$this->belongsToMany('ReligiousOrders', ['through' => 'Affiliations']);
 

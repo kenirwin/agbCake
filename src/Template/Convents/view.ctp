@@ -93,6 +93,7 @@
                 <th scope="col"><?= __('Id') ?></th>
                 <th scope="col"><?= __('Woman Id') ?></th>
                 <th scope="col"><?= __('Role') ?></th>
+                <th scope="col"><?= __('Architectural Style') ?></th>
                 <th scope="col"><?= __('Start Date') ?></th>
                 <th scope="col"><?= __('End Date') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
@@ -108,6 +109,17 @@
                 <td><?= h($role->id) ?></td>
                 <td><?= $this->Html->link(h($curr_woman), ['controller' => 'Women', 'action' => 'view', $role->woman_id]) ?></td>
                 <td><?= h($role->role) ?></td>
+	        <td>
+<?php
+	      if (isset($role->style_id)) {
+		foreach ($convent->architectural_styles as $style) {
+		  if ($style->id == $role->style_id) { 
+		    echo $this->Html->link(h($style->name), ['controller' => 'ArchitecturalStyles', 'action' => 'view', $role->style_id]);
+		  }
+		}
+	      }
+?>
+	        </td>
                 <td><?= h($role->start_date) ?></td>
                 <td><?= h($role->end_date) ?></td>
                 <td class="actions">

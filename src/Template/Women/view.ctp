@@ -117,11 +117,12 @@ else { echo "Unknown"; }
 
     <div class="related">
         <h4><?= __('Roles for '. $woman->name) ?></h4>
-        <?php if (!empty($woman->roles)): ?>
+    <?php if (!empty($woman->roles)): ?>
         <table cellpadding="0" cellspacing="0">
             <tr>
                 <th scope="col"><?= __('Convent') ?></th>
                 <th scope="col"><?= __('Role') ?></th>
+	   <th scope="col"><?= __('Architectural Style') ?></th>
                 <th scope="col"><?= __('Start Date') ?></th>
                 <th scope="col"><?= __('End Date') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
@@ -137,6 +138,19 @@ else { echo "Unknown"; }
             <tr>
                 <td><?= $this->Html->Link( h($curr_convent), ['controller' => 'Convents', 'action' => 'view', $role->convent_id]) ?></td>
                 <td><?= h($role->role) ?></td>
+	      <td>
+<?
+	      if (is_int($role->style_id)) {
+		foreach ($woman->architectural_styles as $style) {
+		  if ($style->id = $role->style_id) { 
+		    $curr_style = $style->name;   
+		  }
+		}
+		echo $this->Html->link(h($curr_style), ['controller' => 'ArchitecturalStyles', 'action' => 'view', $role->style_id]);
+	      }
+		  ?>
+
+		  </td>
                 <td><?= h($role->start_date) ?></td>
                 <td><?= h($role->end_date) ?></td>
                 <td class="actions">

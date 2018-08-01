@@ -35,14 +35,54 @@
     </table>
 </div>
 
-<?
-    $women = $architecturalStyle->women;
-foreach($women as $woman) {
-  print '<p>'.$woman.'</p>';
-}
-    $roles = $architecturalStyle->roles;
-foreach($roles as $role) {
-  print '<p>'.$role.'</p>';
-}
-    var_dump($architecturalStyle);
+
+
+
+<div class="related view large-10 medium-9 columns content">
+    <h4><?= __('Related Women &amp; Building Projects') ?></h4>
+    <?php if (!empty($architecturalStyle->roles)): 
+	if (!empty($architecturalStyle->women)):
+	  $women = $architecturalStyle->women;
+$convents = $architecturalStyle->convents;
+endif; //women
 ?>
+
+        <table cellpadding="0" cellspacing="0">
+            <tr>
+  <th scope="col"><?= __('Role Id') ?></th>
+  <th scope="col"><?= __('Woman') ?></th>
+  <th scope="col"><?= __('Role') ?></th>
+  <th scope="col"><?= __('Convent') ?></th>
+  <th scope="col"><?= __('Start Year') ?></th>
+  <th scope="col"><?= __('End Year') ?></th>
+  <th scope="col" class="actions"><?= __('Actions') ?></th>
+            </tr>
+  <?php foreach ($architecturalStyle->roles as $role): ?>
+            <tr>
+  <td><?= $this->Html->link(h($role->id), ['controller' => 'Roles', 'action' => 'view', $role->id]) ?></td>
+<?php
+  foreach ($women as $woman) {
+  if ($woman->id == $role->woman_id) { $curr_woman = $woman->name; }
+}
+?>
+  <td><?= $this->Html->link(h($curr_woman), ['controller' => 'Women', 'action' => 'view', $role->woman_id]) ?></td>
+  <td><?= h($role->role) ?></td>
+<?php
+  foreach ($convents as $convent) {
+  if ($convent->id == $role->convent_id) { $curr_convent = $convent->name; }
+}
+?>
+  <td><?= $this->Html->link(h($curr_convent), ['controller' => 'Convents', 'action' => 'view', $role->convent_id]) ?></td>
+  <td><?= h($role->start_year) ?></td>
+  <td><?= h($role->end_year) ?></td>
+                <td class="actions">
+  <?= $this->Html->link(__('View'), ['controller' => 'Roles', 'action' => 'view', $role->id]) ?>
+  <?= $this->Html->link(__('Edit'), ['controller' => 'Roles', 'action' => 'edit', $role->id]) ?>
+  <?= $this->Form->postLink(__('Delete'), ['controller' => 'Roles', 'action' => 'delete', $role->id], ['confirm' => __('Are you sure you want to delete # {0}?', $role->id)]) ?>
+                </td>
+            </tr>
+  <?php endforeach; ?>
+        </table>
+	<?php else: ?>
+		<div class="nothing-to-list">No related building projects to show.</div>        <?php endif; ?>
+    </div>

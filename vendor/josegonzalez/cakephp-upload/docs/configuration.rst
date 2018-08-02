@@ -1,5 +1,17 @@
+Configuration
+=============
+
+Protected field names
+---------------------
+
+As this plugin is a Behavior, there are some field names you can not use
+because they are used by the internal CakePHP system. Please do not these
+field names:
+
+- priority
+
 Behavior configuration options
-==============================
+------------------------------
 
 This is a list of all the available configuration options which can be
 passed in under each field in your behavior configuration.
@@ -60,13 +72,17 @@ passed in under each field in your behavior configuration.
 
     - ``filesystem.root``: (default ``ROOT . DS``) Directory where files should be written to by default
     - ``filesystem.adapter``: (default Local Flysystem Adapter) A Flysystem-compatible adapter. Can also be a callable that returns an adapter.
+    - ``filesystem.visibility``: (default ``'public'``) Sets the related file permissions. Should either be ``'public'`` or ``'private'``.
 
 -  ``nameCallback``: A callable that can be used by the default pathProcessor to rename a file. Only handles original file naming.
 
    -  Default: ``NULL``
    -  Available arguments:
 
+      -  ``Table $table``: The table of the current entity
+      -  ``Entity $entity``: The entity you want to add/edit
       -  ``array $data``: The upload data
+      -  ``string $field``: The field for which data will be added/edited
       -  ``array $settings``: UploadBehavior settings for the current field
 
    -  Return: (string) the new name for the file
@@ -74,6 +90,18 @@ passed in under each field in your behavior configuration.
 -  ``keepFilesOnDelete``: Keep *all* files when deleting a record.
 
    -  Default: (boolean) ``true``
+
+-  ``deleteCallback``: A callable that can be used to delete different versions of the file.
+
+   -  Default: ``NULL``
+   -  Available arguments:
+
+      -  ``string $path``: Basepath of the file you want to delete
+      -  ``Entity $entity``: The entity you want to delete
+      -  ``string $field``: The field for which data will be removed
+      -  ``array $settings``: UploadBehavior settings for the current field
+
+   -  Return: (array) the files you want to be deleted
 
 -  ``restoreValueOnFailure``: Restores original value of the current field when uploaded file has error
 

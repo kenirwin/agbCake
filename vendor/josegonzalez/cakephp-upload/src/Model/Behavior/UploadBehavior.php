@@ -16,6 +16,9 @@ use UnexpectedValueException;
 
 class UploadBehavior extends Behavior
 {
+    private $protectedFieldNames = [
+        'priority',
+    ];
 
     /**
      * Initialize hook
@@ -80,6 +83,10 @@ class UploadBehavior extends Behavior
     public function beforeSave(Event $event, Entity $entity, ArrayObject $options)
     {
         foreach ($this->config() as $field => $settings) {
+            if (in_array($field, $this->protectedFieldNames)) {
+                continue;
+            }
+
             if (Hash::get((array)$entity->get($field), 'error') !== UPLOAD_ERR_OK) {
                 if (Hash::get($settings, 'restoreValueOnFailure', true)) {
                     $entity->set($field, $entity->getOriginal($field));
@@ -119,21 +126,36 @@ class UploadBehavior extends Behavior
      */
     public function afterDelete(Event $event, Entity $entity, ArrayObject $options)
     {
+        $result = true;
+
         foreach ($this->config() as $field => $settings) {
-            if (Hash::get($settings, 'keepFilesOnDelete', true)) {
+            if (in_array($field, $this->protectedFieldNames) || Hash::get($settings, 'keepFilesOnDelete', true)) {
                 continue;
             }
 
-            $path = $this->getPathProcessor($entity, $entity->{$field}, $field, $settings)->basepath();
+            $dirField = Hash::get($settings, 'fields.dir', 'dir');
+            if ($entity->has($dirField)) {
+                $path = $entity->get($dirField);
+            } else {
+                $path = $this->getPathProcessor($entity, $entity->get($field), $field, $settings)->basepath();
+            }
 
-            $file = [$path . $entity->{$field}];
+            $callback = Hash::get($settings, 'deleteCallback', null);
+            if ($callback && is_callable($callback)) {
+                $files = $callback($path, $entity, $field, $settings);
+            } else {
+                $files = [$path . $entity->get($field)];
+            }
+
             $writer = $this->getWriter($entity, [], $field, $settings);
-            $success = $writer->delete($file);
+            $success = $writer->delete($files);
 
-            if ((new Collection($success))->contains(false)) {
-                return false;
+            if ($result && (new Collection($success))->contains(false)) {
+                $result = false;
             }
         }
+
+        return $result;
     }
 
     /**

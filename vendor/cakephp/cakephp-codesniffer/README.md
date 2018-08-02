@@ -1,4 +1,9 @@
-# CakePHP Code Sniffer [![Build Status](https://travis-ci.org/cakephp/cakephp-codesniffer.png?branch=master)](http://travis-ci.org/cakephp/cakephp-codesniffer)
+# CakePHP Code Sniffer
+
+[![Build Status](https://img.shields.io/travis/cakephp/cakephp-codesniffer/master.svg?style=flat-square)](https://travis-ci.org/cakephp/cakephp-codesniffer)
+[![Coverage Status](https://img.shields.io/codecov/c/github/cakephp/cakephp-codesniffer.svg?style=flat-square)](https://codecov.io/github/cakephp/cakephp-codesniffer)
+[![Total Downloads](https://img.shields.io/packagist/dt/cakephp/cakephp-codesniffer.svg?style=flat-square)](https://packagist.org/packages/cakephp/cakephp-codesniffer)
+[![Latest Stable Version](https://img.shields.io/packagist/v/cakephp/cakephp-codesniffer.svg?style=flat-square)](https://packagist.org/packages/cakephp/cakephp-codesniffer)
 
 This code works with [phpcs](http://pear.php.net/manual/en/package.php.php-codesniffer.php)
 and checks code against the coding standards used in CakePHP.
@@ -26,6 +31,18 @@ installed phpcs, and this package with PEAR, you can do the following:
 
 :warning: Warning when these sniffs are installed with composer, ensure that
 you have configured the CodeSniffer `installed_paths` setting.
+
+## Running Tests
+
+You can run tests with composer. Because of how PHPCS test suites work, there is
+additional configuration state in `phpcs` that is required.
+
+```bash
+composer test
+```
+
+Once this has been done once, you can use `phpunit --filter CakePHP` to run the
+tests for the rules in this repository.
 
 ## Contributing
 

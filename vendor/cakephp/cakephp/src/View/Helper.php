@@ -181,6 +181,7 @@ class Helper implements EventListenerInterface
         // We cannot change the key here in 3.x, but the behavior is inverted in this case
         $escape = isset($options['escape']) && $options['escape'] === false;
         if ($escape) {
+            /** @var string $confirm */
             $confirm = h($confirm);
         }
 
@@ -197,7 +198,9 @@ class Helper implements EventListenerInterface
      */
     public function addClass(array $options = [], $class = null, $key = 'class')
     {
-        if (isset($options[$key]) && trim($options[$key])) {
+        if (isset($options[$key]) && is_array($options[$key])) {
+            $options[$key][] = $class;
+        } elseif (isset($options[$key]) && trim($options[$key])) {
             $options[$key] .= ' ' . $class;
         } else {
             $options[$key] = $class;

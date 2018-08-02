@@ -53,6 +53,13 @@ class Validator implements ArrayAccess, IteratorAggregate, Countable
     protected $_providers = [];
 
     /**
+     * An associative array of objects or classes used as a default provider list
+     *
+     * @var array
+     */
+    protected static $_defaultProviders = [];
+
+    /**
      * Contains the validation messages associated with checking the presence
      * for each corresponding field.
      *
@@ -82,6 +89,7 @@ class Validator implements ArrayAccess, IteratorAggregate, Countable
     public function __construct()
     {
         $this->_useI18n = function_exists('__d');
+        $this->_providers = self::$_defaultProviders;
     }
 
     /**
@@ -211,6 +219,43 @@ class Validator implements ArrayAccess, IteratorAggregate, Countable
     }
 
     /**
+     * Returns the default provider stored under that name if it exists.
+     *
+     * @param string $name The name under which the provider should be retrieved.
+     * @return object|string|null
+     */
+    public static function getDefaultProvider($name)
+    {
+        if (!isset(self::$_defaultProviders[$name])) {
+            return null;
+        }
+
+        return self::$_defaultProviders[$name];
+    }
+
+    /**
+     * Associates an object to a name so it can be used as a default provider.
+     *
+     * @param string $name The name under which the provider should be set.
+     * @param object|string $object Provider object or class name.
+     * @return void
+     */
+    public static function addDefaultProvider($name, $object)
+    {
+        self::$_defaultProviders[$name] = $object;
+    }
+
+    /**
+     * Get the list of default providers.
+     *
+     * @return array
+     */
+    public static function getDefaultProviders()
+    {
+        return array_keys(self::$_defaultProviders);
+    }
+
+    /**
      * Associates an object to a name so it can be used as a provider. Providers are
      * objects or class names that can contain methods used during validation of for
      * deciding whether a validation rule can be applied. All validation methods,
@@ -226,6 +271,10 @@ class Validator implements ArrayAccess, IteratorAggregate, Countable
      */
     public function provider($name, $object = null)
     {
+        deprecationWarning(
+            'Validator::provider() is deprecated. ' .
+            'Use Validator::setProvider()/getProvider() instead.'
+        );
         if ($object !== null) {
             return $this->setProvider($name, $object);
         }
@@ -348,6 +397,9 @@ class Validator implements ArrayAccess, IteratorAggregate, Countable
         }
 
         foreach ($rules as $name => $rule) {
+            if (is_array($rule)) {
+                $rule += ['rule' => $name];
+            }
             $field->add($name, $rule);
         }
 
@@ -369,12 +421,17 @@ class Validator implements ArrayAccess, IteratorAggregate, Countable
      *
      * @param string $field The root field for the nested validator.
      * @param \Cake\Validation\Validator $validator The nested validator.
+     * @param string|null $message The error message when the rule fails.
+     * @param string|callable|null $when Either 'create' or 'update' or a callable that returns
+     *   true when the validation rule should be applied.
      * @return $this
      */
-    public function addNested($field, Validator $validator)
+    public function addNested($field, Validator $validator, $message = null, $when = null)
     {
+        $extra = array_filter(['message' => $message, 'on' => $when]);
+
         $field = $this->field($field);
-        $field->add(static::NESTED, ['rule' => function ($value, $context) use ($validator) {
+        $field->add(static::NESTED, $extra + ['rule' => function ($value, $context) use ($validator, $message) {
             if (!is_array($value)) {
                 return false;
             }
@@ -383,7 +440,9 @@ class Validator implements ArrayAccess, IteratorAggregate, Countable
             }
             $errors = $validator->errors($value, $context['newRecord']);
 
-            return empty($errors) ? true : $errors;
+            $message = $message ? [static::NESTED => $message] : [];
+
+            return empty($errors) ? true : $errors + $message;
         }]);
 
         return $this;
@@ -404,12 +463,17 @@ class Validator implements ArrayAccess, IteratorAggregate, Countable
      *
      * @param string $field The root field for the nested validator.
      * @param \Cake\Validation\Validator $validator The nested validator.
+     * @param string|null $message The error message when the rule fails.
+     * @param string|callable|null $when Either 'create' or 'update' or a callable that returns
+     *   true when the validation rule should be applied.
      * @return $this
      */
-    public function addNestedMany($field, Validator $validator)
+    public function addNestedMany($field, Validator $validator, $message = null, $when = null)
     {
+        $extra = array_filter(['message' => $message, 'on' => $when]);
+
         $field = $this->field($field);
-        $field->add(static::NESTED, ['rule' => function ($value, $context) use ($validator) {
+        $field->add(static::NESTED, $extra + ['rule' => function ($value, $context) use ($validator, $message) {
             if (!is_array($value)) {
                 return false;
             }
@@ -427,7 +491,9 @@ class Validator implements ArrayAccess, IteratorAggregate, Countable
                 }
             }
 
-            return empty($errors) ? true : $errors;
+            $message = $message ? [static::NESTED => $message] : [];
+
+            return empty($errors) ? true : $errors + $message;
         }]);
 
         return $this;
@@ -492,7 +558,7 @@ class Validator implements ArrayAccess, IteratorAggregate, Countable
             $settings = $this->_convertValidatorToArray($fieldName, $defaults, $setting);
             $fieldName = current(array_keys($settings));
 
-            $this->field($fieldName)->isPresenceRequired($settings[$fieldName]['mode']);
+            $this->field($fieldName)->requirePresence($settings[$fieldName]['mode']);
             if ($settings[$fieldName]['message']) {
                 $this->_presenceMessages[$fieldName] = $settings[$fieldName]['message'];
             }
@@ -582,7 +648,7 @@ class Validator implements ArrayAccess, IteratorAggregate, Countable
             $settings = $this->_convertValidatorToArray($fieldName, $settingsDefault, $setting);
             $fieldName = current(array_keys($settings));
 
-            $this->field($fieldName)->isEmptyAllowed($settings[$fieldName]['when']);
+            $this->field($fieldName)->allowEmpty($settings[$fieldName]['when']);
             if ($settings[$fieldName]['message']) {
                 $this->_allowEmptyMessages[$fieldName] = $settings[$fieldName]['message'];
             }
@@ -705,7 +771,7 @@ class Validator implements ArrayAccess, IteratorAggregate, Countable
                 };
             }
 
-            $this->field($fieldName)->isEmptyAllowed($whenSetting);
+            $this->field($fieldName)->allowEmpty($whenSetting);
             if ($settings[$fieldName]['message']) {
                 $this->_allowEmptyMessages[$fieldName] = $settings[$fieldName]['message'];
             }
@@ -812,7 +878,7 @@ class Validator implements ArrayAccess, IteratorAggregate, Countable
         $extra = array_filter(['on' => $when, 'message' => $message]);
 
         return $this->add($field, 'greaterThan', $extra + [
-            'rule' => ['comparison', '>', $value]
+            'rule' => ['comparison', Validation::COMPARE_GREATER, $value]
         ]);
     }
 
@@ -832,7 +898,7 @@ class Validator implements ArrayAccess, IteratorAggregate, Countable
         $extra = array_filter(['on' => $when, 'message' => $message]);
 
         return $this->add($field, 'greaterThanOrEqual', $extra + [
-            'rule' => ['comparison', '>=', $value]
+            'rule' => ['comparison', Validation::COMPARE_GREATER_OR_EQUAL, $value]
         ]);
     }
 
@@ -852,7 +918,7 @@ class Validator implements ArrayAccess, IteratorAggregate, Countable
         $extra = array_filter(['on' => $when, 'message' => $message]);
 
         return $this->add($field, 'lessThan', $extra + [
-            'rule' => ['comparison', '<', $value]
+            'rule' => ['comparison', Validation::COMPARE_LESS, $value]
         ]);
     }
 
@@ -872,7 +938,7 @@ class Validator implements ArrayAccess, IteratorAggregate, Countable
         $extra = array_filter(['on' => $when, 'message' => $message]);
 
         return $this->add($field, 'lessThanOrEqual', $extra + [
-            'rule' => ['comparison', '<=', $value]
+            'rule' => ['comparison', Validation::COMPARE_LESS_OR_EQUAL, $value]
         ]);
     }
 
@@ -892,7 +958,7 @@ class Validator implements ArrayAccess, IteratorAggregate, Countable
         $extra = array_filter(['on' => $when, 'message' => $message]);
 
         return $this->add($field, 'equals', $extra + [
-            'rule' => ['comparison', '==', $value]
+            'rule' => ['comparison', Validation::COMPARE_EQUAL, $value]
         ]);
     }
 
@@ -912,7 +978,7 @@ class Validator implements ArrayAccess, IteratorAggregate, Countable
         $extra = array_filter(['on' => $when, 'message' => $message]);
 
         return $this->add($field, 'notEquals', $extra + [
-            'rule' => ['comparison', '!=', $value]
+            'rule' => ['comparison', Validation::COMPARE_NOT_EQUAL, $value]
         ]);
     }
 
@@ -921,12 +987,12 @@ class Validator implements ArrayAccess, IteratorAggregate, Countable
      *
      * If both fields have the exact same value the rule will pass.
      *
-     * @param mixed $field The field you want to apply the rule to.
-     * @param mixed $secondField The field you want to compare against.
+     * @param string $field The field you want to apply the rule to.
+     * @param string $secondField The field you want to compare against.
      * @param string|null $message The error message when the rule fails.
      * @param string|callable|null $when Either 'create' or 'update' or a callable that returns
      *   true when the validation rule should be applied.
-     * @see \Cake\Validation\Validation::compareWith()
+     * @see \Cake\Validation\Validation::compareFields()
      * @return $this
      */
     public function sameAs($field, $secondField, $message = null, $when = null)
@@ -934,7 +1000,154 @@ class Validator implements ArrayAccess, IteratorAggregate, Countable
         $extra = array_filter(['on' => $when, 'message' => $message]);
 
         return $this->add($field, 'sameAs', $extra + [
-            'rule' => ['compareWith', $secondField]
+            'rule' => ['compareFields', $secondField, Validation::COMPARE_SAME]
+        ]);
+    }
+
+    /**
+     * Add a rule to compare that two fields have different values.
+     *
+     * @param string $field The field you want to apply the rule to.
+     * @param string $secondField The field you want to compare against.
+     * @param string|null $message The error message when the rule fails.
+     * @param string|callable|null $when Either 'create' or 'update' or a callable that returns
+     *   true when the validation rule should be applied.
+     * @see \Cake\Validation\Validation::compareFields()
+     * @return $this
+     * @since 3.6.0
+     */
+    public function notSameAs($field, $secondField, $message = null, $when = null)
+    {
+        $extra = array_filter(['on' => $when, 'message' => $message]);
+
+        return $this->add($field, 'notSameAs', $extra + [
+            'rule' => ['compareFields', $secondField, Validation::COMPARE_NOT_SAME]
+        ]);
+    }
+
+    /**
+     * Add a rule to compare one field is equal to another.
+     *
+     * @param string $field The field you want to apply the rule to.
+     * @param string $secondField The field you want to compare against.
+     * @param string|null $message The error message when the rule fails.
+     * @param string|callable|null $when Either 'create' or 'update' or a callable that returns
+     *   true when the validation rule should be applied.
+     * @see \Cake\Validation\Validation::compareFields()
+     * @return $this
+     * @since 3.6.0
+     */
+    public function equalToField($field, $secondField, $message = null, $when = null)
+    {
+        $extra = array_filter(['on' => $when, 'message' => $message]);
+
+        return $this->add($field, 'equalToField', $extra + [
+            'rule' => ['compareFields', $secondField, Validation::COMPARE_EQUAL]
+        ]);
+    }
+
+    /**
+     * Add a rule to compare one field is not equal to another.
+     *
+     * @param string $field The field you want to apply the rule to.
+     * @param string $secondField The field you want to compare against.
+     * @param string|null $message The error message when the rule fails.
+     * @param string|callable|null $when Either 'create' or 'update' or a callable that returns
+     *   true when the validation rule should be applied.
+     * @see \Cake\Validation\Validation::compareFields()
+     * @return $this
+     * @since 3.6.0
+     */
+    public function notEqualToField($field, $secondField, $message = null, $when = null)
+    {
+        $extra = array_filter(['on' => $when, 'message' => $message]);
+
+        return $this->add($field, 'notEqualToField', $extra + [
+            'rule' => ['compareFields', $secondField, Validation::COMPARE_NOT_EQUAL]
+        ]);
+    }
+
+    /**
+     * Add a rule to compare one field is greater than another.
+     *
+     * @param string $field The field you want to apply the rule to.
+     * @param string $secondField The field you want to compare against.
+     * @param string|null $message The error message when the rule fails.
+     * @param string|callable|null $when Either 'create' or 'update' or a callable that returns
+     *   true when the validation rule should be applied.
+     * @see \Cake\Validation\Validation::compareFields()
+     * @return $this
+     * @since 3.6.0
+     */
+    public function greaterThanField($field, $secondField, $message = null, $when = null)
+    {
+        $extra = array_filter(['on' => $when, 'message' => $message]);
+
+        return $this->add($field, 'greaterThanField', $extra + [
+            'rule' => ['compareFields', $secondField, Validation::COMPARE_GREATER]
+        ]);
+    }
+
+    /**
+     * Add a rule to compare one field is greater than or equal to another.
+     *
+     * @param string $field The field you want to apply the rule to.
+     * @param string $secondField The field you want to compare against.
+     * @param string|null $message The error message when the rule fails.
+     * @param string|callable|null $when Either 'create' or 'update' or a callable that returns
+     *   true when the validation rule should be applied.
+     * @see \Cake\Validation\Validation::compareFields()
+     * @return $this
+     * @since 3.6.0
+     */
+    public function greaterThanOrEqualToField($field, $secondField, $message = null, $when = null)
+    {
+        $extra = array_filter(['on' => $when, 'message' => $message]);
+
+        return $this->add($field, 'greaterThanOrEqualToField', $extra + [
+            'rule' => ['compareFields', $secondField, Validation::COMPARE_GREATER_OR_EQUAL]
+        ]);
+    }
+
+    /**
+     * Add a rule to compare one field is less than another.
+     *
+     * @param string $field The field you want to apply the rule to.
+     * @param string $secondField The field you want to compare against.
+     * @param string|null $message The error message when the rule fails.
+     * @param string|callable|null $when Either 'create' or 'update' or a callable that returns
+     *   true when the validation rule should be applied.
+     * @see \Cake\Validation\Validation::compareFields()
+     * @return $this
+     * @since 3.6.0
+     */
+    public function lessThanField($field, $secondField, $message = null, $when = null)
+    {
+        $extra = array_filter(['on' => $when, 'message' => $message]);
+
+        return $this->add($field, 'lessThanField', $extra + [
+            'rule' => ['compareFields', $secondField, Validation::COMPARE_LESS]
+        ]);
+    }
+
+    /**
+     * Add a rule to compare one field is less than or equal to another.
+     *
+     * @param string $field The field you want to apply the rule to.
+     * @param string $secondField The field you want to compare against.
+     * @param string|null $message The error message when the rule fails.
+     * @param string|callable|null $when Either 'create' or 'update' or a callable that returns
+     *   true when the validation rule should be applied.
+     * @see \Cake\Validation\Validation::compareFields()
+     * @return $this
+     * @since 3.6.0
+     */
+    public function lessThanOrEqualToField($field, $secondField, $message = null, $when = null)
+    {
+        $extra = array_filter(['on' => $when, 'message' => $message]);
+
+        return $this->add($field, 'lessThanOrEqualToField', $extra + [
+            'rule' => ['compareFields', $secondField, Validation::COMPARE_LESS_OR_EQUAL]
         ]);
     }
 
@@ -1562,6 +1775,7 @@ class Validator implements ArrayAccess, IteratorAggregate, Countable
      * @param string|null $message The error message when the rule fails.
      * @param string|callable|null $when Either 'create' or 'update' or a callable that returns
      *   true when the validation rule should be applied.
+     * @see \Cake\Validation\Validation::isArray()
      * @return $this
      */
     public function isArray($field, $message = null, $when = null)
@@ -1570,6 +1784,25 @@ class Validator implements ArrayAccess, IteratorAggregate, Countable
 
         return $this->add($field, 'isArray', $extra + [
                 'rule' => 'isArray'
+            ]);
+    }
+
+    /**
+     * Add a validation rule to ensure that a field contains a scalar.
+     *
+     * @param string $field The field you want to apply the rule to.
+     * @param string|null $message The error message when the rule fails.
+     * @param string|callable|null $when Either 'create' or 'update' or a callable that returns
+     *   true when the validation rule should be applied.
+     * @see \Cake\Validation\Validation::isScalar()
+     * @return $this
+     */
+    public function scalar($field, $message = null, $when = null)
+    {
+        $extra = array_filter(['on' => $when, 'message' => $message]);
+
+        return $this->add($field, 'scalar', $extra + [
+                'rule' => 'isScalar'
             ]);
     }
 
@@ -1637,7 +1870,7 @@ class Validator implements ArrayAccess, IteratorAggregate, Countable
                     $value = $value['_ids'];
                 }
 
-                return Validation::numElements($value, '>=', $count);
+                return Validation::numElements($value, Validation::COMPARE_GREATER_OR_EQUAL, $count);
             }
         ]);
     }
@@ -1664,7 +1897,7 @@ class Validator implements ArrayAccess, IteratorAggregate, Countable
                     $value = $value['_ids'];
                 }
 
-                return Validation::numElements($value, '<=', $count);
+                return Validation::numElements($value, Validation::COMPARE_LESS_OR_EQUAL, $count);
             }
         ]);
     }
@@ -1701,6 +1934,25 @@ class Validator implements ArrayAccess, IteratorAggregate, Countable
         $context = compact('data', 'newRecord', 'field', 'providers');
 
         return !$this->_checkPresence($this->field($field), $context);
+    }
+
+    /**
+     * Returns whether or not a field matches against a regular expression.
+     *
+     * @param string $field Field name.
+     * @param string $regex Regular expression.
+     * @param string|null $message The error message when the rule fails.
+     * @param string|callable|null $when Either 'create' or 'update' or a callable that returns
+     *   true when the validation rule should be applied.
+     * @return $this
+     */
+    public function regex($field, $regex, $message = null, $when = null)
+    {
+        $extra = array_filter(['on' => $when, 'message' => $message]);
+
+        return $this->add($field, 'regex', $extra + [
+            'rule' => ['custom', $regex]
+        ]);
     }
 
     /**

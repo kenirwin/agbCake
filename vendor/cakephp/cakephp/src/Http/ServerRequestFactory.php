@@ -15,7 +15,6 @@
 namespace Cake\Http;
 
 use Cake\Core\Configure;
-use Cake\Network\Session;
 use Cake\Utility\Hash;
 use Zend\Diactoros\ServerRequestFactory as BaseFactory;
 
@@ -98,6 +97,10 @@ abstract class ServerRequestFactory extends BaseFactory
             $uri = $uri->withPath($pathInfo);
         } else {
             $uri = static::updatePath($base, $uri);
+        }
+
+        if (!$uri->getHost()) {
+            $uri = $uri->withHost('localhost');
         }
 
         // Splat on some extra attributes to save

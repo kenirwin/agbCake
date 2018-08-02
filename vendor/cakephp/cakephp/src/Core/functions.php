@@ -31,7 +31,7 @@ if (!function_exists('h')) {
      * @param bool $double Encode existing html entities.
      * @param string|null $charset Character set to use when escaping. Defaults to config value in `mb_internal_encoding()`
      * or 'UTF-8'.
-     * @return string Wrapped text.
+     * @return string|array Wrapped text.
      * @link https://book.cakephp.org/3.0/en/core-libraries/global-constants-and-functions.html#h
      */
     function h($text, $double = true, $charset = null)
@@ -189,7 +189,7 @@ if (!function_exists('env')) {
      *
      * @param string $key Environment variable name.
      * @param string|null $default Specify a default value in case the environment variable is not defined.
-     * @return string|null Environment variable setting.
+     * @return string|bool|null Environment variable setting.
      * @link https://book.cakephp.org/3.0/en/core-libraries/global-constants-and-functions.html#env
      */
     function env($key, $default = null)
@@ -247,4 +247,74 @@ if (!function_exists('env')) {
         return $default;
     }
 
+}
+
+if (!function_exists('triggerWarning')) {
+    /**
+     * Triggers an E_USER_WARNING.
+     *
+     * @param string $message The warning message.
+     * @return void
+     */
+    function triggerWarning($message)
+    {
+        $stackFrame = 1;
+        $trace = debug_backtrace();
+        if (isset($trace[$stackFrame])) {
+            $frame = $trace[$stackFrame];
+            $frame += ['file' => '[internal]', 'line' => '??'];
+            $message = sprintf(
+                '%s - %s, line: %s',
+                $message,
+                $frame['file'],
+                $frame['line']
+            );
+        }
+        trigger_error($message, E_USER_WARNING);
+    }
+}
+
+if (!function_exists('deprecationWarning')) {
+    /**
+     * Helper method for outputting deprecation warnings
+     *
+     * @param string $message The message to output as a deprecation warning.
+     * @param int $stackFrame The stack frame to include in the error. Defaults to 1
+     *   as that should point to application/plugin code.
+     * @return void
+     */
+    function deprecationWarning($message, $stackFrame = 1)
+    {
+        if (!(error_reporting() & E_USER_DEPRECATED)) {
+            return;
+        }
+
+        $trace = debug_backtrace();
+        if (isset($trace[$stackFrame])) {
+            $frame = $trace[$stackFrame];
+            $frame += ['file' => '[internal]', 'line' => '??'];
+
+            $message = sprintf(
+                '%s - %s, line: %s',
+                $message,
+                $frame['file'],
+                $frame['line']
+            );
+        }
+
+        trigger_error($message, E_USER_DEPRECATED);
+    }
+}
+
+if (!function_exists('getTypeName')) {
+    /**
+     * Returns the objects class or var type of it's not an object
+     *
+     * @param mixed $var Variable to check
+     * @return string Returns the class name or variable type
+     */
+    function getTypeName($var)
+    {
+        return is_object($var) ? get_class($var) : gettype($var);
+    }
 }

@@ -55,7 +55,7 @@ class ActionDispatcher
     public function __construct($factory = null, $eventManager = null, array $filters = [])
     {
         if ($eventManager) {
-            $this->eventManager($eventManager);
+            $this->setEventManager($eventManager);
         }
         foreach ($filters as $filter) {
             $this->addFilter($filter);
@@ -91,7 +91,7 @@ class ActionDispatcher
         }
 
         $response = $this->_invoke($controller);
-        if (isset($request->params['return'])) {
+        if ($request->getParam('return')) {
             return $response;
         }
 
@@ -121,15 +121,16 @@ class ActionDispatcher
             throw new LogicException('Controller actions can only return Cake\Http\Response or null.');
         }
 
-        if (!$response && $controller->autoRender) {
-            $response = $controller->render();
-        } elseif (!$response) {
-            $response = $controller->response;
+        if (!$response && $controller->isAutoRenderEnabled()) {
+            $controller->render();
         }
 
         $result = $controller->shutdownProcess();
         if ($result instanceof Response) {
             return $result;
+        }
+        if (!$response) {
+            $response = $controller->response;
         }
 
         return $response;
@@ -148,8 +149,13 @@ class ActionDispatcher
      */
     public function addFilter(EventListenerInterface $filter)
     {
+        deprecationWarning(
+            'ActionDispatcher::addFilter() is deprecated. ' .
+            'This is only available for backwards compatibility with DispatchFilters'
+        );
+
         $this->filters[] = $filter;
-        $this->eventManager()->on($filter);
+        $this->getEventManager()->on($filter);
     }
 
     /**

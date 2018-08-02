@@ -117,7 +117,7 @@ class Hash
      *
      * @param array|\ArrayAccess $data The data to extract from.
      * @param string $path The path to extract.
-     * @return array An array of the extracted values. Returns an empty array
+     * @return array|\ArrayAccess An array of the extracted values. Returns an empty array
      *   if there are no matches.
      * @link https://book.cakephp.org/3.0/en/core-libraries/hash.html#Cake\Utility\Hash::extract
      */
@@ -135,7 +135,12 @@ class Hash
 
         // Simple paths.
         if (!preg_match('/[{\[]/', $path)) {
-            return (array)static::get($data, $path);
+            $data = static::get($data, $path);
+            if ($data !== null && !(is_array($data) || $data instanceof ArrayAccess)) {
+                return [$data];
+            }
+
+            return $data !== null ? (array)$data : [];
         }
 
         if (strpos($path, '[') === false) {
@@ -155,6 +160,7 @@ class Hash
 
             foreach ($context[$_key] as $item) {
                 if (is_object($item) && method_exists($item, 'toArray')) {
+                    /** @var \Cake\Datasource\EntityInterface $item */
                     $item = $item->toArray();
                 }
                 foreach ((array)$item as $k => $v) {
@@ -261,6 +267,8 @@ class Hash
                 $prop = $prop ? '1' : '0';
             } elseif ($isBool) {
                 $prop = $prop ? 'true' : 'false';
+            } elseif (is_numeric($prop)) {
+                $prop = (string)$prop;
             }
 
             // Pattern matches and other operators.
@@ -345,11 +353,6 @@ class Hash
         $count = count($path);
         $last = $count - 1;
         foreach ($path as $i => $key) {
-            if ((is_numeric($key) && (int)$key > 0 || $key === '0') &&
-                strpos($key, '0') !== 0
-            ) {
-                $key = (int)$key;
-            }
             if ($op === 'insert') {
                 if ($i === $last) {
                     $_list[$key] = $values;
@@ -365,7 +368,9 @@ class Hash
                 }
             } elseif ($op === 'remove') {
                 if ($i === $last) {
-                    unset($_list[$key]);
+                    if (is_array($_list)) {
+                        unset($_list[$key]);
+                    }
 
                     return $data;
                 }
@@ -414,7 +419,7 @@ class Hash
             if ($match && is_array($v)) {
                 if ($conditions) {
                     if (static::_matches($v, $conditions)) {
-                        if ($nextPath) {
+                        if ($nextPath !== '') {
                             $data[$k] = static::remove($v, $nextPath);
                         } else {
                             unset($data[$k]);
@@ -426,7 +431,7 @@ class Hash
                 if (empty($data[$k])) {
                     unset($data[$k]);
                 }
-            } elseif ($match && empty($nextPath)) {
+            } elseif ($match && $nextPath === '') {
                 unset($data[$k]);
             }
         }

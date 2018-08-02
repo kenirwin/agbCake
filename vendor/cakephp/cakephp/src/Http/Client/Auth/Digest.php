@@ -81,9 +81,9 @@ class Digest
     protected function _getServerInfo(Request $request, $credentials)
     {
         $response = $this->_client->get(
-            $request->url(),
+            $request->getUri(),
             [],
-            ['auth' => []]
+            ['auth' => ['type' => null]]
         );
 
         if (!$response->getHeader('WWW-Authenticate')) {
@@ -116,7 +116,7 @@ class Digest
     {
         $path = $request->getUri()->getPath();
         $a1 = md5($credentials['username'] . ':' . $credentials['realm'] . ':' . $credentials['password']);
-        $a2 = md5($request->method() . ':' . $path);
+        $a2 = md5($request->getMethod() . ':' . $path);
         $nc = null;
 
         if (empty($credentials['qop'])) {

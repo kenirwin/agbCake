@@ -14,6 +14,7 @@
  */
 namespace Cake\ORM\Behavior;
 
+use ArrayObject;
 use Cake\Database\Expression\IdentifierExpression;
 use Cake\Datasource\EntityInterface;
 use Cake\Datasource\Exception\RecordNotFoundException;
@@ -91,16 +92,17 @@ class TreeBehavior extends Behavior
      *
      * @param \Cake\Event\Event $event The beforeSave event that was fired
      * @param \Cake\Datasource\EntityInterface $entity the entity that is going to be saved
+     * @param \ArrayObject $options Options.
      * @return void
      * @throws \RuntimeException if the parent to set for the node is invalid
      */
-    public function beforeSave(Event $event, EntityInterface $entity)
+    public function beforeSave(Event $event, EntityInterface $entity, ArrayObject $options)
     {
         $isNew = $entity->isNew();
         $config = $this->getConfig();
         $parent = $entity->get($config['parent']);
         $primaryKey = $this->_getPrimaryKey();
-        $dirty = $entity->dirty($config['parent']);
+        $dirty = $entity->isDirty($config['parent']);
         $level = $config['level'];
 
         if ($parent && $entity->get($primaryKey) == $parent) {
@@ -160,9 +162,10 @@ class TreeBehavior extends Behavior
      *
      * @param \Cake\Event\Event $event The afterSave event that was fired
      * @param \Cake\Datasource\EntityInterface $entity the entity that is going to be saved
+     * @param \ArrayObject $options Options.
      * @return void
      */
-    public function afterSave(Event $event, EntityInterface $entity)
+    public function afterSave(Event $event, EntityInterface $entity, ArrayObject $options)
     {
         if (!$this->_config['level'] || $entity->isNew()) {
             return;
@@ -213,9 +216,10 @@ class TreeBehavior extends Behavior
      *
      * @param \Cake\Event\Event $event The beforeDelete event that was fired
      * @param \Cake\Datasource\EntityInterface $entity The entity that is going to be saved
+     * @param \ArrayObject $options Options.
      * @return void
      */
-    public function beforeDelete(Event $event, EntityInterface $entity)
+    public function beforeDelete(Event $event, EntityInterface $entity, ArrayObject $options)
     {
         $config = $this->getConfig();
         $this->_ensureFields($entity);
@@ -224,12 +228,16 @@ class TreeBehavior extends Behavior
         $diff = $right - $left + 1;
 
         if ($diff > 2) {
-            $this->_table->deleteAll(function ($exp) use ($config, $left, $right) {
-                /* @var \Cake\Database\Expression\QueryExpression $exp */
-                return $exp
-                    ->gte($config['leftField'], $left + 1)
-                    ->lte($config['leftField'], $right - 1);
-            });
+            $query = $this->_scope($this->_table->query())
+                ->delete()
+                ->where(function ($exp) use ($config, $left, $right) {
+                    /* @var \Cake\Database\Expression\QueryExpression $exp */
+                    return $exp
+                        ->gte($config['leftField'], $left + 1)
+                        ->lte($config['leftField'], $right - 1);
+                });
+            $statement = $query->execute();
+            $statement->closeCursor();
         }
 
         $this->_sync($diff, '-', "> {$right}");
@@ -345,7 +353,7 @@ class TreeBehavior extends Behavior
             function ($exp) use ($config) {
                 /* @var \Cake\Database\Expression\QueryExpression $exp */
                 $leftInverse = clone $exp;
-                $leftInverse->type('*')->add('-1');
+                $leftInverse->setConjunction('*')->add('-1');
                 $rightInverse = clone $leftInverse;
 
                 return $exp
@@ -585,7 +593,7 @@ class TreeBehavior extends Behavior
         $this->_table->updateAll($node->extract($fields), [$primary => $node->get($primary)]);
 
         foreach ($fields as $field) {
-            $node->dirty($field, false);
+            $node->setDirty($field, false);
         }
 
         return $node;
@@ -675,8 +683,8 @@ class TreeBehavior extends Behavior
         $node->set($left, $targetLeft);
         $node->set($right, $targetLeft + ($nodeRight - $nodeLeft));
 
-        $node->dirty($left, false);
-        $node->dirty($right, false);
+        $node->setDirty($left, false);
+        $node->setDirty($right, false);
 
         return $node;
     }
@@ -765,8 +773,8 @@ class TreeBehavior extends Behavior
         $node->set($left, $targetRight - ($nodeRight - $nodeLeft));
         $node->set($right, $targetRight);
 
-        $node->dirty($left, false);
-        $node->dirty($right, false);
+        $node->setDirty($left, false);
+        $node->setDirty($right, false);
 
         return $node;
     }
@@ -928,13 +936,13 @@ class TreeBehavior extends Behavior
      */
     protected function _scope($query)
     {
-        $config = $this->getConfig();
+        $scope = $this->getConfig('scope');
 
-        if (is_array($config['scope'])) {
-            return $query->where($config['scope']);
+        if (is_array($scope)) {
+            return $query->where($scope);
         }
-        if (is_callable($config['scope'])) {
-            return $config['scope']($query);
+        if (is_callable($scope)) {
+            return $scope($query);
         }
 
         return $query;
@@ -960,7 +968,7 @@ class TreeBehavior extends Behavior
         $entity->set($fresh->extract($fields), ['guard' => false]);
 
         foreach ($fields as $field) {
-            $entity->dirty($field, false);
+            $entity->setDirty($field, false);
         }
     }
 

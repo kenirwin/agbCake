@@ -144,10 +144,12 @@ abstract class Cell
         EventManager $eventManager = null,
         array $cellOptions = []
     ) {
-        $this->eventManager($eventManager);
+        if ($eventManager !== null) {
+            $this->setEventManager($eventManager);
+        }
         $this->request = $request;
         $this->response = $response;
-        $this->modelFactory('Table', [$this->tableLocator(), 'get']);
+        $this->modelFactory('Table', [$this->getTableLocator(), 'get']);
 
         $this->_validCellOptions = array_merge(['action', 'args'], $this->_validCellOptions);
         foreach ($this->_validCellOptions as $var) {
@@ -158,6 +160,20 @@ abstract class Cell
         if (!empty($cellOptions['cache'])) {
             $this->_cache = $cellOptions['cache'];
         }
+
+        $this->initialize();
+    }
+
+    /**
+     * Initialization hook method.
+     *
+     * Implement this method to avoid having to overwrite
+     * the constructor and calling parent::__construct().
+     *
+     * @return void
+     */
+    public function initialize()
+    {
     }
 
     /**
@@ -213,7 +229,7 @@ abstract class Cell
             try {
                 return $this->View->render($template);
             } catch (MissingTemplateException $e) {
-                throw new MissingCellViewException(['file' => $template, 'name' => $name]);
+                throw new MissingCellViewException(['file' => $template, 'name' => $name], null, $e);
             }
         };
 

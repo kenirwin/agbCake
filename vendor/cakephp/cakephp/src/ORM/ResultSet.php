@@ -175,17 +175,16 @@ class ResultSet implements ResultSetInterface
      */
     public function __construct($query, $statement)
     {
-        $repository = $query->repository();
+        $repository = $query->getRepository();
         $this->_statement = $statement;
         $this->_driver = $query->getConnection()->getDriver();
-        $this->_defaultTable = $query->repository();
+        $this->_defaultTable = $query->getRepository();
         $this->_calculateAssociationMap($query);
         $this->_hydrate = $query->isHydrationEnabled();
         $this->_entityClass = $repository->getEntityClass();
         $this->_useBuffering = $query->isBufferedResultsEnabled();
-        $this->_defaultAlias = $this->_defaultTable->alias();
+        $this->_defaultAlias = $this->_defaultTable->getAlias();
         $this->_calculateColumnMap($query);
-        $this->_calculateTypeMap();
         $this->_autoFields = $query->isAutoFieldsEnabled();
 
         if ($this->_useBuffering) {
@@ -433,6 +432,7 @@ class ResultSet implements ResultSetInterface
      */
     protected function _calculateTypeMap()
     {
+        deprecationWarning('ResultSet::_calculateTypeMap() is deprecated, and will be removed in 4.0.0.');
     }
 
     /**
@@ -460,7 +460,7 @@ class ResultSet implements ResultSetInterface
         }
 
         foreach (array_intersect($fields, $schema->columns()) as $col) {
-            $typeName = $schema->columnType($col);
+            $typeName = $schema->getColumnType($col);
             if (isset($typeMap[$typeName])) {
                 $types[$col] = $typeMap[$typeName];
             }
@@ -492,7 +492,7 @@ class ResultSet implements ResultSetInterface
     /**
      * Correctly nests results keys including those coming from associations
      *
-     * @param mixed $row Array containing columns and values or false if there is no results
+     * @param array $row Array containing columns and values or false if there is no results
      * @return array Results
      */
     protected function _groupResult($row)
@@ -585,7 +585,7 @@ class ResultSet implements ResultSetInterface
             $results[$defaultAlias]['_matchingData'] = $results['_matchingData'];
         }
 
-        $options['source'] = $this->_defaultTable->registryAlias();
+        $options['source'] = $this->_defaultTable->getRegistryAlias();
         if (isset($results[$defaultAlias])) {
             $results = $results[$defaultAlias];
         }
@@ -607,6 +607,8 @@ class ResultSet implements ResultSetInterface
      */
     protected function _castValues($alias, $values)
     {
+        deprecationWarning('ResultSet::_castValues() is deprecated, and will be removed in 4.0.0.');
+
         return $values;
     }
 

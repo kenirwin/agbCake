@@ -20,6 +20,8 @@ use Cake\Event\EventDispatcherInterface;
  *
  * Once collected context data can be passed to another object.
  * This is done in Controller, TemplateTask and View for example.
+ *
+ * @property array $_validViewOptions
  */
 trait ViewVarsTrait
 {
@@ -115,7 +117,7 @@ trait ViewVarsTrait
             $this->viewVars,
             isset($this->request) ? $this->request : null,
             isset($this->response) ? $this->response : null,
-            $this instanceof EventDispatcherInterface ? $this->eventManager() : null
+            $this instanceof EventDispatcherInterface ? $this->getEventManager() : null
         );
     }
 

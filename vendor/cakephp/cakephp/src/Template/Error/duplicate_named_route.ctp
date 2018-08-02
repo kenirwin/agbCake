@@ -25,7 +25,7 @@ $attributes = $error->getAttributes();
 $this->start('subheading');
 ?>
     <strong>Error: </strong>
-    <?= h($error->getMessage()); ?>
+    <?= $error->getMessage(); ?>
 <?php $this->end() ?>
 
 <?php $this->start('file') ?>
@@ -50,9 +50,9 @@ Remove duplicate route names in your route configuration.</p>
     echo '<tr>';
     printf(
         '<td width="25%%">%s</td><td>%s</td><td width="20%%">%s</td>',
-        h($other->template),
-        h(Debugger::exportVar($other->defaults)),
-        h(Debugger::exportVar($other->options))
+        $other->template,
+        Debugger::exportVar($other->defaults),
+        Debugger::exportVar($other->options)
     );
     echo '</tr>';
     ?>

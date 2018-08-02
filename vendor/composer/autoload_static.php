@@ -50,6 +50,7 @@ class ComposerStaticInit52c7dff28bc4c0f03d5506bffbfdf96f
             'Seld\\PharUtils\\' => 15,
             'Seld\\JsonLint\\' => 14,
             'Seld\\CliPrompt\\' => 15,
+            'Search\\' => 7,
         ),
         'P' => 
         array (
@@ -162,6 +163,10 @@ class ComposerStaticInit52c7dff28bc4c0f03d5506bffbfdf96f
         'Seld\\CliPrompt\\' => 
         array (
             0 => __DIR__ . '/..' . '/seld/cli-prompt/src',
+        ),
+        'Search\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/friendsofcake/search/src',
         ),
         'Psy\\' => 
         array (

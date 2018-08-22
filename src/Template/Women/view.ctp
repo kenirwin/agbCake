@@ -106,6 +106,14 @@ else { echo "Unknown"; }
         <?= $this->Text->autoParagraph(h($woman->related_to)); ?>
     </div>
     <div class="row">
+        <h4><?= __('Binche Travel Note') ?></h4>
+        <?= $this->Text->autoParagraph(h($woman->binche_note)); ?>
+    </div>
+    <div class="row">
+        <h4><?= __('Diana Note') ?></h4>
+        <?= $this->Text->autoParagraph(h($woman->diana_note)); ?>
+    </div>
+    <div class="row">
         <h4><?= __('Notes') ?></h4>
         <?= $this->Text->autoParagraph(h($woman->notes)); ?>
     </div>

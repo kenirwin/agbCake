@@ -14,6 +14,12 @@
     <h3><?= __('Women') ?></h3>
     <?= $this->Form->create("",['type'=>'get']); ?>
     <?= $this->Form->control('keyword',['default'=>$this->request->query('keyword')]); ?>
+    <? 
+    if (null === $this->request->query('search_notes')) { $checked = true; }
+    elseif ($this->request->query('search_notes') == 0) { $checked = false; }
+    else { $checked = true; }
+?>
+    <?= $this->Form->control('search_notes',['type'=>'checkbox', 'checked'=>$checked]); ?>
     <button>Search</button>
     <?= $this->Form->end(); ?>
     <table cellpadding="0" cellspacing="0">

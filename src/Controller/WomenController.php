@@ -14,9 +14,12 @@ class WomenController extends AppController
     public function index()
     {
       $keyword = $this->request->query('keyword');
-
+      $search_notes = $this->request->query('search_notes');
       $fields_to_search = ['name','name_english','name_spanish','name_portuguese','name_other'];
-      //      $note_fields = ['related_to','notes','sources','binche_note','diana_note'];
+      $note_fields = ['related_to','notes','sources','binche_note','diana_note'];
+      if ($search_notes == true) {
+	$fields_to_search = array_merge ($fields_to_search,$note_fields);
+      }
       $or_array = [];
       foreach ($fields_to_search as $field) {
 	$or_array["$field LIKE"] = '%'.$keyword.'%';

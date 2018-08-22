@@ -13,6 +13,21 @@ class WomenController extends AppController
      */
     public function index()
     {
+      $keyword = $this->request->query('keyword');
+      if (!empty($keyword)) {
+	$this->paginate = [
+			   //			   'conditions'=>['name LIKE'=>'%'.$keyword.'%']
+			   'conditions' => [
+					    'OR' => [
+						     'name LIKE'=>'%'.$keyword.'%',
+						     'name_english LIKE'=>'%'.$keyword.'%',
+						     'name_spanish LIKE'=>'%'.$keyword.'%',
+						     'name_portuguese LIKE'=>'%'.$keyword.'%',
+						     'name_other LIKE'=>'%'.$keyword.'%',
+						     ]
+					    ]
+			   ];
+      }
         $women = $this->paginate($this->Women);
 
         $this->set(compact('women'));
